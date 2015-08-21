@@ -254,6 +254,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 #else
 int main(int argc, char **argv){
+    std::vector<std::string> args;
+    for(int i=1; i < argc; i++){ // skip zerro parameter - application name with path
+        std::string str = std::string(argv[i]);
+        args.push_back(str);
+    }
 #endif
     srand(time(NULL));
 
@@ -295,11 +300,11 @@ int main(int argc, char **argv){
                 if(args[i]!="--help"){
                     std::cout << "unknown parameter: \"" << args[i] << "\"" << std::endl;
                 }
-                if(__WIN32__){
+                #ifdef __WIN32__
                     std::cout << "JetLee.exe [parameter [value]] game. " << std::endl;
-                }else{
+                #else
                     std::cout << "JetLee [parameter [value]] game. " << std::endl;
-                }
+                #endif
                 std::cout << "--help - this help screen." << std::endl;
                 std::cout << "--hero VALUE - select hero. VALUE=number for 1 to 3." << std::endl <<
                         "\t1 - Ninja.\n\t2 - Yamo.\n\t3 - JetLee (default)."  << std::endl;
