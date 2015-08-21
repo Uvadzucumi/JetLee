@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="JetLee" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option platforms="Unix;Mac;" />
+				<Option output="bin/Debug/JetLee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-D__LINUX__" />
+				</Compiler>
+				<Linker>
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="SDL2" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option platforms="Unix;Mac;" />
+				<Option output="bin/Release/JetLee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="SDL2" />
+				</Linker>
+			</Target>
+			<Target title="Windows - Debug">
+				<Option output="bin/Debug/JetLee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/DebugWin/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="gdi32" />
+					<Add library="SDL2" />
+				</Linker>
+			</Target>
+			<Target title="Windows - Release">
+				<Option output="bin/Release/JetLee" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/ReleaseWin/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="gdi32" />
+					<Add library="SDL2" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../myogl/src/3rd/picopng.cpp" />
+		<Unit filename="../myogl/src/animation.cpp" />
+		<Unit filename="../myogl/src/animation.h" />
+		<Unit filename="../myogl/src/base_object.cpp" />
+		<Unit filename="../myogl/src/base_object.h" />
+		<Unit filename="../myogl/src/camera.cpp" />
+		<Unit filename="../myogl/src/camera.h" />
+		<Unit filename="../myogl/src/config.h" />
+		<Unit filename="../myogl/src/config_file.cpp" />
+		<Unit filename="../myogl/src/config_file.h" />
+		<Unit filename="../myogl/src/entity.cpp" />
+		<Unit filename="../myogl/src/entity.h" />
+		<Unit filename="../myogl/src/events.cpp" />
+		<Unit filename="../myogl/src/events.h" />
+		<Unit filename="../myogl/src/fileformats/bmpimage.cpp" />
+		<Unit filename="../myogl/src/fileformats/bmpimage.h" />
+		<Unit filename="../myogl/src/frame_buffer.cpp" />
+		<Unit filename="../myogl/src/frame_buffer.h" />
+		<Unit filename="../myogl/src/light.h" />
+		<Unit filename="../myogl/src/log.cpp" />
+		<Unit filename="../myogl/src/log.h" />
+		<Unit filename="../myogl/src/material.cpp" />
+		<Unit filename="../myogl/src/material.h" />
+		<Unit filename="../myogl/src/myogl.cpp" />
+		<Unit filename="../myogl/src/myogl.h" />
+		<Unit filename="../myogl/src/render.cpp" />
+		<Unit filename="../myogl/src/render.h" />
+		<Unit filename="../myogl/src/shaders.h" />
+		<Unit filename="../myogl/src/singleton.h" />
+		<Unit filename="../myogl/src/sprites.cpp" />
+		<Unit filename="../myogl/src/sprites.h" />
+		<Unit filename="../myogl/src/texture.cpp" />
+		<Unit filename="../myogl/src/texture.h" />
+		<Unit filename="../myogl/src/ui/base_ui_class.h" />
+		<Unit filename="../myogl/src/ui/bitmap_font.cpp" />
+		<Unit filename="../myogl/src/ui/bitmap_font.h" />
+		<Unit filename="../myogl/src/ui/panel.h" />
+		<Unit filename="../myogl/src/ui/text_box.cpp" />
+		<Unit filename="../myogl/src/ui/text_box.h" />
+		<Unit filename="../myogl/src/vbo.cpp" />
+		<Unit filename="../myogl/src/vbo.h" />
+		<Unit filename="../myogl/src/vector_types.h" />
+		<Unit filename="ai.h" />
+		<Unit filename="camera2d.h" />
+		<Unit filename="game.h" />
+		<Unit filename="graphics.cpp" />
+		<Unit filename="graphics.h" />
+		<Unit filename="hero.cpp" />
+		<Unit filename="hero.h" />
+		<Unit filename="locations.cpp" />
+		<Unit filename="locations.h" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
