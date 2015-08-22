@@ -13,8 +13,11 @@ Created for igdc.ru contest #125
 Windows build (https://raw.github.com/Uvadzucumi/jetlee/master/bin/JetLee.zip)
 
 
-command promt line parmeters:
-
-  --hero VALUE  - select player hero (VALUE - number for 1 to 3. 1 - Ninja, 2 - Yamo, 3 - JetLee. default: 3)
-  --scale VALUE - select pixels scale (VALUE - number for 1 to 20. default: 4)
+command promt parmeters:
+```
+  JetLee.exe [command VALUE]
+  commands:
+    --hero VALUE  - select player hero (VALUE - number for 1 to 3. 1 - Ninja, 2 - Yamo, 3 - JetLee. default: 3)
+    --scale VALUE - select pixels scale (VALUE - number for 1 to 20. default: 4)
+```
 
