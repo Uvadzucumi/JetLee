@@ -314,7 +314,7 @@ void CBaseHero::hitToHero(int hero_index){
     if(m_position.x<heroes[hero_index]->getPosition().x){
         heroes[hero_index]->setOrientation(ORIENTATION_LEFT);
     }else{
-        heroes[hero_index]->setOrientation(ORIENTATION_LEFT);
+        heroes[hero_index]->setOrientation(ORIENTATION_RIGHT);
     }
     heroes[hero_index]->setAction(HERO_ACTION_DIE);
 }
@@ -554,7 +554,7 @@ void CEnemy::Update(double DeltaTime){
 
             if(m_wait_spawn){
                 m_wait_spawn=false;
-                std::cout << m_name + " enters the world." << std::endl;
+                //std::cout << m_name + " enters the world." << std::endl;
                 ai->setEnable(true);
             }
 

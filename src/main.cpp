@@ -281,23 +281,23 @@ int main(int argc, char **argv){
                         hero_index=1;
                         break;
                     case 3:
-                        std::cout << "Select JetLee for Hero!" << std::endl;
+                        std::cout << "Select Jet Lee for Hero!" << std::endl;
                         hero_index=2;
                         break;
                     default:
                         std::cout << "wrong hero value! (" << hero << ")" << std::endl;
                         break;
                 }
-            }else if(args[i]=="--scale" && (i+1)<(int)args.size()){
+            }else if(args[i]=="--scale" && (i+1) < (int)args.size()){
                 std::cout << "scale=" << args[++i] << std::endl;
                 int scale=atoi(args[i].c_str());
-                if(scale>=1 && scale<10){
+                if(scale >= 1 && scale <= 10){
                     scale_factor=scale;
                 }else{
                     std::cout << "wrong scale factor value! (" << scale << ")" << std::endl;
                 }
             }else{
-                if(args[i]!="--help"){
+                if(args[i] != "--help"){
                     std::cout << "unknown parameter: \"" << args[i] << "\"" << std::endl;
                 }
                 #ifdef __WIN32__
@@ -308,7 +308,7 @@ int main(int argc, char **argv){
                 std::cout << "--help - this help screen." << std::endl;
                 std::cout << "--hero VALUE - select hero. VALUE=number for 1 to 3." << std::endl <<
                         "\t1 - Ninja.\n\t2 - Yamo.\n\t3 - JetLee (default)."  << std::endl;
-                std::cout << "--scale VALUE - screen scale. VALUE=number for 1 to 10. default: 4" << std::endl;
+                std::cout << "--scale VALUE - screen scale. VALUE=number for 1 to 20. default: 4" << std::endl;
                 return 0;
             }
 
