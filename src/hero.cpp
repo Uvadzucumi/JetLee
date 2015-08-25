@@ -690,8 +690,10 @@ void CEnemy::Update(double DeltaTime){
                         if(i!=m_owner_index){
                             //log("chack hero id="<<i);
                             if( !heroes[i]->isAction(HERO_ACTION_DIE) &&
-                                !heroes[i]->isAction(HERO_ACTION_KICK)
-                                && heroes[i]->isEnabled() && heroes[i]->isVisible()){ // active enemy
+                                !heroes[i]->isAction(HERO_ACTION_KICK) &&
+                                !heroes[i]->isAction(HERO_ACTION_HIDE) &&
+                                 heroes[i]->isEnabled() &&
+                                 heroes[i]->isVisible()){ // active enemy
                                 // check bbox crossover
                                 BBox enemy_bbox=heroes[i]->getBBox();
                                 if(hitbox.intersect(enemy_bbox)){
@@ -722,8 +724,10 @@ void CEnemy::Update(double DeltaTime){
                 for(int i=0; i<3; i++){ // only 2 enemy
                     if(i!=m_owner_index){
                             if( !heroes[i]->isAction(HERO_ACTION_DIE) &&
-                                !heroes[i]->isAction(HERO_ACTION_KICK)
-                                && heroes[i]->isEnabled() && heroes[i]->isVisible()){ // active enemy
+                                !heroes[i]->isAction(HERO_ACTION_KICK) &&
+                                !heroes[i]->isAction(HERO_ACTION_HIDE) &&
+                                 heroes[i]->isEnabled() &&
+                                 heroes[i]->isVisible()){ // active enemy
                             // check bbox crossover
                             //log(getName()<<" KICK to " << heroes[i]->getName());
                             BBox enemy_bbox=heroes[i]->getBBox();
