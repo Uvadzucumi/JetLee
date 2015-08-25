@@ -147,9 +147,9 @@ void OnLoop(double DeltaTime){
         if(App->IsKeyDown(SDLK_c)){
             free_cam=!free_cam;
             if(free_cam){
-                std::cout << "Free camera: On" << std::endl;
+                log("Free camera: On");
             }else{
-                std::cout << "Free camera: Off" << std::endl;
+                log("Free camera: Off");
             }
         }
 
@@ -192,11 +192,7 @@ void OnLoop(double DeltaTime){
                     heroes[hero_index]->setAction(HERO_ACTION_KICK);
                 }
             }
-/*
-            if(App->IsKeyDown(SDLK_d)){
-                heroes[hero_index]->setAction(HERO_ACTION_DIE);
-            }
-*/
+
             OnUpdate(DeltaTime);
 
         }else{ // free camera movement
@@ -264,6 +260,7 @@ int main(int argc, char **argv){
 
     hero_index=2;
     scale_factor=4;
+    difficulty_level=50;
 
     if(args.size()){
 
@@ -289,13 +286,31 @@ int main(int argc, char **argv){
                         break;
                 }
             }else if(args[i]=="--scale" && (i+1) < (int)args.size()){
-                std::cout << "scale=" << args[++i] << std::endl;
-                int scale=atoi(args[i].c_str());
-                if(scale >= 1 && scale <= 10){
+                int scale=atoi(args[++i].c_str());
+                if(scale >= 1 && scale <= 20){
                     scale_factor=scale;
                 }else{
                     std::cout << "wrong scale factor value! (" << scale << ")" << std::endl;
                 }
+            }else if(args[i]=="--level"){
+                int level=atoi(args[++i].c_str());
+                switch(level){
+                    case 1:
+                        difficulty_level=30;
+                        std::cout << "difficulty level=Karate Kid" << std::endl;
+                    break;
+                    case 2:
+                        difficulty_level=50;
+                        std::cout << "difficulty level=Bully" << std::endl;
+                    break;
+                    case 3:
+                        difficulty_level=100;
+                        std::cout << "difficulty level=Shaolin master" << std::endl;
+                    break;
+                    default:
+                        std::cout << "wrong difficulty level (" << level << ")" << std::endl;
+                }
+
             }else{
                 if(args[i] != "--help"){
                     std::cout << "unknown parameter: \"" << args[i] << "\"" << std::endl;
@@ -309,6 +324,8 @@ int main(int argc, char **argv){
                 std::cout << "--hero VALUE - select hero. VALUE=number for 1 to 3." << std::endl <<
                         "\t1 - Ninja.\n\t2 - Yamo.\n\t3 - JetLee (default)."  << std::endl;
                 std::cout << "--scale VALUE - screen scale. VALUE=number for 1 to 20. default: 4" << std::endl;
+                std::cout << "--level VALUE - difficulty level. VALUE=number for 1 to 3. default: 2" <<
+                        "\t1 - Karate Kid.\t2 - Bully.\t3 - Shaolin master." << std::endl;
                 return 0;
             }
 
@@ -316,23 +333,29 @@ int main(int argc, char **argv){
 
     }
 
+    log("hero: " << hero_index);
+    log("Scale factor: " << scale_factor);
+    log("difficulty_level: " << difficulty_level);
+
     App = new MyOGL::CApplication();
     if(!App->Init(WIN_WIDTH * scale_factor, WIN_HEIGHT * scale_factor, 32, false, WIN_TITLE)){
         delete App;
+        logE("Application Init Error!");
         return -1;
     };
 
     // Load textures & create sprites
     if(!loadGraphics(scale_factor)){
+        logE("Load graphics error!");
         return -1;
     }
-    std::cout << "loaded " << textures.size() << " textures" << std::endl << "initialized " << sprites.size() << " sprites." << std::endl;
+    log("loaded " << textures.size() << " textures" << std::endl << "initialized " << sprites.size() << " sprites.");// << std::endl;
 
     initHeroObjects(scale_factor, hero_index);
-    std::cout << "initialized " << heroes.size() << " heroes." << std::endl;
+    log( "initialized " << heroes.size() << " heroes." );
 
     initLocations(scale_factor);
-    std::cout << "initialised " << locations.size() << " locations." << std::endl;
+    log( "initialised " << locations.size() << " locations." );
 
     heroes[HERO_SM]->setName("SM");
     heroes[HERO_FM]->setName("FM");
@@ -347,6 +370,7 @@ int main(int argc, char **argv){
             heroes[i]->setVisible(true);
             heroes[i]->setAction(HERO_ACTION_STAY);
         }else{
+            ((CEnemy *)heroes[i])->setIndex(i);
             ((CEnemy *)heroes[i])->goSpawnPoint(spawn_time);
             spawn_time+=SPAWN_TIME;
         }

@@ -449,14 +449,7 @@ void CHero::Update(double DeltaTime){
             // kick ememies
             if(isAction(HERO_ACTION_KICK)){
                 BBox hitbox;
-                /*
-                if(m_orientation==ORIENTATION_RIGHT){
-                    hitbox.left_top={m_position.x+4, m_position.y - 3};
-                }else{
-                    hitbox.left_top={m_position.x-11, m_position.y - 3};
-                }
-                hitbox.right_bottom={hitbox.left_top.x+7, hitbox.left_top.y+2};
-                */
+
                 if(m_orientation==ORIENTATION_RIGHT){
                     hitbox.left_top={m_position.x+kick_position.left_top.x, m_position.y + kick_position.left_top.y};
                 }else{
@@ -642,32 +635,111 @@ void CEnemy::Update(double DeltaTime){
                 if(isAction(HERO_ACTION_STAY) && ai->isTaskReady()){
                     //std::cout << m_name << ": TASK READY & ENEMY STAY - NEED START ";
                     int task=ai->getTask();
-                    MyOGL::Vector2i point;
+                    MyOGL::Vector2i point=ai->getPoint();
+                    int distance;
+                    if(m_position.x>=point.x){
+                        m_orientation=ORIENTATION_LEFT;
+                        distance=m_position.x-point.x;
+                        setAction(HERO_ACTION_RUN);
+                    }else if(m_position.x<point.x){
+                        m_orientation=ORIENTATION_RIGHT;
+                        distance=point.x-m_position.x;
+                        setAction(HERO_ACTION_RUN);
+                    }
                     switch(task){
                         case AI_ACTION_MOVE_TO_FLOR_POINT:
-                            point=ai->getPoint();
-                            //std::cout << "go to point (" << point.x << ") from (" << m_position.x << ")" << std::endl;
-                            int distance;
-                            if(m_position.x>=point.x){
-                                m_orientation=ORIENTATION_LEFT;
-                                distance=m_position.x-point.x;
-                                setAction(HERO_ACTION_RUN);
-                            }else if(m_position.x<point.x){
-                                m_orientation=ORIENTATION_RIGHT;
-                                distance=point.x-m_position.x;
-                                setAction(HERO_ACTION_RUN);
-                            }
-                            //std::cout << "distance: " << distance << " " << m_position.x << " point: " << point.x << std::endl;
                             if(distance<=4){
                                 setAction(HERO_ACTION_STAY);
                                 ai->startSelectTask();
                             }
                         break;
+                        case AI_MOVE_TO_HERO_POINT:
+                            if(distance <= 20 && this->getActionIndexByType(HERO_ACTION_KICK)){
+                                // kick
+                                    this->setAction(HERO_ACTION_KICK);
+                                    this->ai->reset();
+                                    this->ai->setEnable(true);
+                                }else{
+                                    if(distance<=4){
+                                        setAction(HERO_ACTION_PUSH);
+                                        ai->startSelectTask();
+                                        this->ai->reset();
+                                        this->ai->setEnable(true);
+                                    }
+                                }
+                            break;
                         default:
                             std::cout << "unknown task: " << task << std::endl;
                     }
 
                 }
+
+                // FIGHT ACTIONS
+                if(this->isAction(HERO_ACTION_PUSH)){
+                    log(m_name << " : PUSH ACTION")
+                    BBox hitbox;
+                    if(m_orientation==ORIENTATION_RIGHT){
+                        hitbox.left_top={m_position.x+push_position.left_top.x, m_position.y + push_position.left_top.y};
+                    }else{
+                        hitbox.left_top={m_position.x-(push_position.left_top.x+push_position.right_bottom.x), m_position.y + push_position.left_top.y};
+                    }
+                    hitbox.right_bottom={hitbox.left_top.x+push_position.right_bottom.x, hitbox.left_top.y+push_position.right_bottom.y};
+                    //std::cout << "pos " << m_position.x << "," << m_position.y << std::endl;
+                    //hitbox.debug();
+                    for(int i=0; i<3; i++){ // only 2 enemy
+                        if(i!=m_owner_index){
+                            //log("chack hero id="<<i);
+                            if( !heroes[i]->isAction(HERO_ACTION_DIE) &&
+                                !heroes[i]->isAction(HERO_ACTION_KICK)
+                                && heroes[i]->isEnabled() && heroes[i]->isVisible()){ // active enemy
+                                // check bbox crossover
+                                BBox enemy_bbox=heroes[i]->getBBox();
+                                if(hitbox.intersect(enemy_bbox)){
+                                    //std::cout << "HIT TO HERO " << i << std::endl;
+                                    hitToHero(i);
+                                    break;
+                                }else{
+                                    //log("MISS");
+                                }
+                            }else{
+                                //log("FALSE");
+                            }
+                        }
+                    }
+                }
+
+                // kick ememies
+            if(isAction(HERO_ACTION_KICK)){
+                BBox hitbox;
+
+                if(m_orientation==ORIENTATION_RIGHT){
+                    hitbox.left_top={m_position.x+kick_position.left_top.x, m_position.y + kick_position.left_top.y};
+                }else{
+                    hitbox.left_top={m_position.x-kick_position.left_top.x-kick_position.right_bottom.x, m_position.y + kick_position.left_top.y};
+                }
+                hitbox.right_bottom={hitbox.left_top.x+kick_position.right_bottom.x, hitbox.left_top.y+kick_position.right_bottom.y};
+
+                for(int i=0; i<3; i++){ // only 2 enemy
+                    if(i!=m_owner_index){
+                            if( !heroes[i]->isAction(HERO_ACTION_DIE) &&
+                                !heroes[i]->isAction(HERO_ACTION_KICK)
+                                && heroes[i]->isEnabled() && heroes[i]->isVisible()){ // active enemy
+                            // check bbox crossover
+                            //log(getName()<<" KICK to " << heroes[i]->getName());
+                            BBox enemy_bbox=heroes[i]->getBBox();
+                            if(hitbox.intersect(enemy_bbox)){
+                                hitToHero(i);
+                                break;
+                            }else{
+                                //log("MISS");
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
 
         } // if animate
     } // if spawned

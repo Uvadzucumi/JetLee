@@ -21,3 +21,12 @@ command promt parmeters:
     --scale VALUE - select pixels scale (VALUE - number for 1 to 20. default: 4)
 ```
 
+Player control keys
+```
+  Left/Right arrows - Run to left or right
+  Up arrow - jump.
+  Down arrow - hide
+  Left Control - Punch
+  Run + Left Control - Kick
+  c - game pause and free camera mode
+```

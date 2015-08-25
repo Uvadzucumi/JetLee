@@ -2,7 +2,6 @@
 #define AI_H_INCLUDED
 
 #include "locations.h"
-#include "hero.h"
 
 enum {
     AI_ACTION_STAY=0,
@@ -31,7 +30,19 @@ class CArtificialIntelligence{
         // tasks data
         MyOGL::Vector2i m_point;
 
+        int m_owner_id;
+        int m_target_id;
+
+
     public:
+
+        void setOwnerIndex(int index){
+            m_owner_id=index;
+        }
+
+        void setTargetIndex(int index){
+            m_target_id=index;
+        }
 
         void setScaleFactor(int factor){
             m_scale_factor=factor;
@@ -39,16 +50,16 @@ class CArtificialIntelligence{
 
         CArtificialIntelligence(){
             m_task=AI_ACTION_STAY;
-            m_scale_factor=1;
+            //m_scale_factor=1;
             m_grid_size=4;
         }
         // x, y - pixel coords
         int getFloorByYCoord(int y){
             int grid_coord=y/m_grid_size;
-            if(grid_coord<=12){
+            if(grid_coord<=16){  // 12
                 return FLOOR_UPPER;
             }
-            if(grid_coord<=21){
+            if(grid_coord<=25){  // 21
                 return FLOOR_MIDDLE;
             }
             return FLOOR_GROUND;
@@ -73,45 +84,14 @@ class CArtificialIntelligence{
             return m_task;
         }
 
-        void setTask(int task){
-            m_ready_action=false;
-            m_wait_time=1.0;
-            switch(task){
-                case AI_ACTION_MOVE_TO_FLOR_POINT:
-                    // get random point in current floor
-                    m_point.x=(rand() % (LOCATION_GRID_WIDTH-4)) * m_grid_size + 2*m_grid_size;
-                    break;
-                default:
-                    std::cout << "Unknown Task for AI::setTask()" << std::endl;
-
-            };
-            m_task=task;
-        }
+        void setTask(int task);
 
         // only new task
-        void startSelectTask(){
+        void startSelectTask();
 
+        bool isTargetInCurrentFloor();
 
-            setTask(AI_ACTION_MOVE_TO_FLOR_POINT);
-        }
-
-        void update(double DeltaTime){
-            if(m_enable){
-                if(m_task==AI_ACTION_STAY){
-                    this->startSelectTask();
-                    return;
-                }
-
-                if(m_wait_time>0){
-                    m_wait_time-=DeltaTime;
-                }else{
-                    //
-                    m_wait_time=0;
-                    m_ready_action=true;
-                }
-                //std::cout << "AI: wait: " << m_wait_time << " task:" << m_task << " point: " << m_point.x << " task_ready: " << isTaskReady() << std::endl;
-            }
-        }
+        void update(double DeltaTime);
 
         void reset(){
             m_task=AI_ACTION_STAY;
@@ -131,5 +111,7 @@ class CArtificialIntelligence{
         }
 
 };
+
+extern int difficulty_level;
 
 #endif // AI_H_INCLUDED

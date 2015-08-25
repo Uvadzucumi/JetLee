@@ -1,0 +1,119 @@
+[
+{
+    "name": "Ninja",
+    "hp": 2,
+    "animations":[
+	{
+	    "name":"Stay",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Run",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Up",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Hide",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+
+    ]
+},
+{
+    "name": "Yamo",
+    "hp": 3,
+    "animations":[
+	{
+	    "name":"Stay",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Run",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Up",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Hide",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+
+    ]
+},
+{
+    "name": "Jet Lee",
+    "hp": 2,
+    "animations":[
+	{
+	    "name":"Stay",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Run",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Up",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+	{
+	    "name":"Hide",
+	    "key_frames":[
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2},
+		{"sprite":2,"dx":3,"dy":2}
+	    ]
+	},
+
+    ]
+}
+]

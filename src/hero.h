@@ -87,6 +87,7 @@ protected:
     MyOGL::Vector2i m_last_found_block;
 
     std::string m_name;
+
     bool m_visible;
 
     int m_action;
@@ -94,6 +95,8 @@ protected:
     int m_max_health;
 
     BBox kick_position, push_position;
+
+    int m_owner_index;
 
 public:
     CBaseHero(int x=0, int y=0){
@@ -105,6 +108,15 @@ public:
         m_action=0;
         m_name="";
         m_visible=false;
+        m_owner_index=hero_index;
+    }
+
+    std::string getName(){
+        return m_name;
+    }
+
+    void setIndex(int owner_index){
+        m_owner_index=owner_index;
     }
 
     void setKickPosition(int x, int y, int w, int h){
@@ -300,10 +312,17 @@ class CEnemy:public CBaseHero{
 
     public:
 
-        CEnemy():CBaseHero(){
+        CEnemy(int owner_index=0):CBaseHero(){
             ai=new CArtificialIntelligence();
             m_spawn_time=0;
             m_wait_spawn=false;
+            m_owner_index=owner_index;
+            ai->setTargetIndex(hero_index);
+        }
+
+        void setIndex(int owner_index){
+            m_owner_index=owner_index;
+            ai->setOwnerIndex(owner_index);
         }
 
         void setScaleFactor(int scale_factor){
