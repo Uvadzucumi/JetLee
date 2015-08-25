@@ -324,8 +324,8 @@ int main(int argc, char **argv){
                 std::cout << "--hero VALUE - select hero. VALUE=number for 1 to 3." << std::endl <<
                         "\t1 - Ninja.\n\t2 - Yamo.\n\t3 - JetLee (default)."  << std::endl;
                 std::cout << "--scale VALUE - screen scale. VALUE=number for 1 to 20. default: 4" << std::endl;
-                std::cout << "--level VALUE - difficulty level. VALUE=number for 1 to 3. default: 2" <<
-                        "\t1 - Karate Kid.\t2 - Bully.\t3 - Shaolin master." << std::endl;
+                std::cout << "--level VALUE - difficulty level. VALUE=number for 1 to 3. default: 2" << std::endl <<
+                        "\t1 - Karate Kid.\n\t2 - Bully.\n\t3 - Shaolin master." << std::endl;
                 return 0;
             }
 
