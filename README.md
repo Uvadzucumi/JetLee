@@ -15,10 +15,19 @@ Windows build (https://raw.github.com/Uvadzucumi/jetlee/master/bin/JetLee.zip)
 
 command promt parmeters:
 ```
-  JetLee.exe [command VALUE]
+  JetLee.exe [command VALUE] [command VALUE] [command VALUE]
   commands:
-    --hero VALUE  - select player hero (VALUE - number for 1 to 3. 1 - Ninja, 2 - Yamo, 3 - JetLee. default: 3)
+    --hero VALUE - select Player hero. VALUE=number for 1 to 3.
+        1 - Ninja.
+        2 - Yamo.
+        3 - JetLee (default).
+
     --scale VALUE - select pixels scale (VALUE - number for 1 to 20. default: 4)
+    --level VALUE - difficulty level. VALUE=number for 1 to 3. default: 2
+        1 - Karate Kid.
+        2 - Bully.
+        3 - Shaolin master.
+
 ```
 
 Player control keys
