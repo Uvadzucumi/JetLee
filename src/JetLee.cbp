@@ -12,11 +12,12 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option parameters="--hero 2 --scale 2" />
+				<Option parameters="--hero 2 --scale 2 --level 3" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-g" />
 					<Add option="-D__LINUX__" />
+					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add library="GL" />
@@ -32,6 +33,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-Wall" />
+					<Add option="-D__LINUX__" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -48,6 +50,7 @@
 				<Option parameters="--hero 1 erer --scale 2" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-DDEBUG" />
 				</Compiler>
 				<Linker>
 					<Add library="opengl32" />
@@ -119,6 +122,7 @@
 		<Unit filename="../myogl/src/vbo.cpp" />
 		<Unit filename="../myogl/src/vbo.h" />
 		<Unit filename="../myogl/src/vector_types.h" />
+		<Unit filename="ai.cpp" />
 		<Unit filename="ai.h" />
 		<Unit filename="camera2d.h" />
 		<Unit filename="game.h" />
@@ -126,6 +130,10 @@
 		<Unit filename="graphics.h" />
 		<Unit filename="hero.cpp" />
 		<Unit filename="hero.h" />
+		<Unit filename="jsmn/jsmn.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="jsmn/jsmn.h" />
 		<Unit filename="locations.cpp" />
 		<Unit filename="locations.h" />
 		<Unit filename="main.cpp" />
