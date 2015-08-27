@@ -23,11 +23,10 @@ command promt parmeters:
         3 - JetLee (default).
 
     --scale VALUE - select pixels scale (VALUE - number for 1 to 20. default: 4)
-    --level VALUE - difficulty level. VALUE=number for 1 to 3. default: 2
+    --level VALUE - difficulty level. VALUE=number for 1 to 3.
         1 - Karate Kid.
-        2 - Bully.
+        2 - Bully (default).
         3 - Shaolin master.
-
 ```
 
 Player control keys

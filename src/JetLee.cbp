@@ -80,6 +80,11 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add library="openal" />
+			<Add library="alut" />
+		</Linker>
+		<Unit filename="../README.md" />
 		<Unit filename="../myogl/src/3rd/picopng.cpp" />
 		<Unit filename="../myogl/src/animation.cpp" />
 		<Unit filename="../myogl/src/animation.h" />
@@ -126,6 +131,7 @@
 		<Unit filename="ai.h" />
 		<Unit filename="camera2d.h" />
 		<Unit filename="game.h" />
+		<Unit filename="gamesound.h" />
 		<Unit filename="graphics.cpp" />
 		<Unit filename="graphics.h" />
 		<Unit filename="hero.cpp" />
@@ -137,6 +143,7 @@
 		<Unit filename="locations.cpp" />
 		<Unit filename="locations.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="sound.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

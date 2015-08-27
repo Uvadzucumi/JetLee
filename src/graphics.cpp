@@ -80,6 +80,8 @@ bool loadGraphics(int sprite_scale){
 
     CREATE_SPRITE_MACRO("congratulation", 0, 0, 400, 64, 464, sprite_scale);
 
+    CREATE_SPRITE_MACRO("enter_to_continue", 0, 64, 400, 104, 413, sprite_scale);
+
     return true;
 
 }

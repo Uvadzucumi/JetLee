@@ -309,26 +309,47 @@ BBox CBaseHero::getBBox(){
 void CBaseHero::Update(double DeltaTime){
 }
 
-void CBaseHero::hitToHero(int hero_index){
+void CBaseHero::hitToHero(int h_index){
+    sound->play(SOUND_FIGHT);
     // set orientation
-    if(m_position.x<heroes[hero_index]->getPosition().x){
-        heroes[hero_index]->setOrientation(ORIENTATION_LEFT);
+    if(m_position.x<heroes[h_index]->getPosition().x){
+        heroes[h_index]->setOrientation(ORIENTATION_LEFT);
     }else{
-        heroes[hero_index]->setOrientation(ORIENTATION_RIGHT);
+        heroes[h_index]->setOrientation(ORIENTATION_RIGHT);
     }
-    heroes[hero_index]->setAction(HERO_ACTION_DIE);
+    heroes[h_index]->setAction(HERO_ACTION_DIE);
+    heroes[h_index]->decreaseHealth(1);
+    if(h_index==hero_index && heroes[h_index]->getHealth()<=0){
+
+        sound->play(SOUND_DIE);
+        game_state=GAME_STATE_END;
+
+    }
 }
 
 
 void CHero::Update(double DeltaTime){
-    if(this->m_enabled){
+    if(this->m_enabled && (game_state==GAME_STATE_PLAY || game_state==GAME_STATE_END)){
+
+        //log("game state: "<<game_state);
 
         if(this->actions[this->m_action].animation.onAnimate(DeltaTime)){
+
+            if(
+                isAction(HERO_ACTION_RUN)
+            ){
+                sound->play(SOUND_STEP);
+            }
 
             MyOGL::Vector2i climb_movement={0,0};
 
             if(this->actions[this->m_action].animation.isFinished()){
-
+                if(
+                    isAction(HERO_ACTION_CLIMB0) ||
+                    isAction(HERO_ACTION_CLIMB1)
+                ){
+                    sound->play(SOUND_STEP);
+                }
                 // if player continue runnig
                 if(this->isAction(HERO_ACTION_RUN) &&
                     (
@@ -388,6 +409,14 @@ void CHero::Update(double DeltaTime){
                                 }
 
                             }else{
+
+                                // if another action finished - hero stay - if not die
+                                if(this->getHealth()<=0){
+                                    log("game state set to FAIL");
+                                    game_state=GAME_STATE_FAIL;
+                                    return;
+                                }
+
                                 this->setAction(HERO_ACTION_STAY);
                             }
                         }
@@ -436,7 +465,7 @@ void CHero::Update(double DeltaTime){
                 }
             }
 
-            if(this->isAction(HERO_ACTION_DOWN)){
+            if(this->isAction(HERO_ACTION_DOWN) || (this->isAction(HERO_ACTION_DIE) && !this->isDownFloor())){
                 this->m_position.y+=1*MUL_COORDS;
             }
 
@@ -477,7 +506,7 @@ void CHero::Update(double DeltaTime){
             if(isInsideBlock(TILE_FLARE)){
                 MyOGL::Vector2i coords=this->getFoundInsideBlock();
                 if(locations[current_location]->collectFlareByCoords(coords.x, coords.y)){
-                    //std::cout << "FLARE COLLECTED!!!" << std::endl;
+                    sound->play(SOUND_FLARE_COLLECT);
                     hatch_flares_count-=1;
                     if(!hatch_flares_count){
                         // open hatch
@@ -500,7 +529,7 @@ void CHero::Update(double DeltaTime){
                     game_over=true;
                 }else{
                     if(portal.location==-1){
-                        std::cout << "Wrong PORTAL!!!" << std::endl;
+                        logW("Wrong PORTAL!!!");
                     }else{ // goto secon location
 
                         current_location=portal.location;
@@ -539,7 +568,7 @@ void CHero::Update(double DeltaTime){
 }
 
 void CEnemy::Update(double DeltaTime){
-    if(this->m_enabled){
+    if(this->m_enabled && (game_state==GAME_STATE_PLAY || game_state==GAME_STATE_END)){
         if(m_spawn_time>0){
             m_spawn_time-=DeltaTime;
         }else{
@@ -669,7 +698,7 @@ void CEnemy::Update(double DeltaTime){
                                 }
                             break;
                         default:
-                            std::cout << "unknown task: " << task << std::endl;
+                            logW("unknown task: " << task );
                     }
 
                 }

@@ -92,6 +92,7 @@ protected:
 
     int m_action;
 
+    int m_health;
     int m_max_health;
 
     BBox kick_position, push_position;
@@ -109,6 +110,16 @@ public:
         m_name="";
         m_visible=false;
         m_owner_index=hero_index;
+        m_health=m_max_health;
+    }
+
+    void decreaseHealth(int dh){
+        m_health-=dh;
+    }
+
+    int getHealth(){
+        //log("health: " << m_health);
+        return m_health;
     }
 
     std::string getName(){
@@ -130,6 +141,7 @@ public:
 
     void setMaxHealt(int max_health){
         m_max_health=max_health;
+        m_health=m_max_health;
     }
 
     const bool isEnabled(){
@@ -300,6 +312,13 @@ class CHero:public CBaseHero{
             " down: " << App->IsKeyPressed(SDLK_DOWN) <<
             " ctrl: " << App->IsKeyPressed(SDLK_LCTRL) <<
             std::endl;
+        }
+
+        void goSpawnPoint(){
+            this->m_enabled=true;
+            m_position=locations[current_location]->getHeroSpawn();
+            this->setAction(HERO_ACTION_STAY);
+            this->m_health=this->m_max_health;
         }
 };
 

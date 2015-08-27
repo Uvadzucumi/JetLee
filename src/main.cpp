@@ -15,8 +15,11 @@
 #include "hero.h"
 #include "camera2d.h"
 #include "locations.h"
+#include "gamesound.h"
 
 #include<string>
+
+CGameSound *sound;
 
 bool show_bboxes=false;
 bool free_cam=false;
@@ -31,7 +34,7 @@ CCamera2d *camera;
 MyOGL::CApplication *App;
 bool game_over=false;
 int scale_factor;
-
+int game_state;
 // Render
 void OnRender(double DeltaTime){
 
@@ -118,7 +121,15 @@ void OnRender(double DeltaTime){
                 }
             }
 
+        }
 
+        if(game_state==GAME_STATE_FAIL){
+            glLoadIdentity();
+            sprites[SPRITE_ENTER_TO_CONTINUE]->setPosition(
+                (WIN_WIDTH*scale_factor-sprites[SPRITE_ENTER_TO_CONTINUE]->getWidth())/2,
+                (WIN_HEIGHT*scale_factor-sprites[SPRITE_ENTER_TO_CONTINUE]->getHeight())/2
+            );
+            sprites[SPRITE_ENTER_TO_CONTINUE]->render();
         }
     }
 
@@ -137,7 +148,13 @@ void OnLoop(double DeltaTime){
         App->OnExit();
     }
 
-    if(!game_over){
+    if(!game_over){ // not WIN
+
+        if(game_state==GAME_STATE_FAIL && App->IsKeyDown(SDLK_RETURN)){
+            //
+            game_state=GAME_STATE_PLAY;
+            ((CHero *)heroes[hero_index])->goSpawnPoint();
+        }
 
         if(App->IsKeyDown(SDLK_b)){
             show_bboxes=!show_bboxes;
@@ -262,6 +279,8 @@ int main(int argc, char **argv){
     scale_factor=4;
     difficulty_level=50;
 
+    game_state=GAME_STATE_PLAY;
+
     if(args.size()){
 
         for(int i=0; i<(int)args.size(); ++i){
@@ -343,6 +362,20 @@ int main(int argc, char **argv){
         logE("Application Init Error!");
         return -1;
     };
+
+    // init sound system
+    sound=new CGameSound();
+    if(!sound->init()){
+        log("Sound system not initialized!");
+    }else{
+
+        if(sound->loadSounds()){
+            log("loading "<<sound->getSourcesCount()<<"sounds");
+        }else{
+            log("load sounds error. sound disabled");
+        }
+
+    }
 
     // Load textures & create sprites
     if(!loadGraphics(scale_factor)){

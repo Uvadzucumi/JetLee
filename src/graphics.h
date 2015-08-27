@@ -49,6 +49,7 @@ enum {
     SPRITE_DEBUG_STAIRS,
     SPRITE_DEBUG_PORTAL,
     SPRITE_CONGRATULATION,
+    SPRITE_ENTER_TO_CONTINUE,
 };
 
 extern std::vector<MyOGL::CTexture*> textures;
