@@ -57,6 +57,7 @@
 					<Add library="glu32" />
 					<Add library="gdi32" />
 					<Add library="SDL2" />
+					<Add library="OpenAL32.dll" />
 				</Linker>
 			</Target>
 			<Target title="Windows - Release">
@@ -73,6 +74,7 @@
 					<Add library="glu32" />
 					<Add library="gdi32" />
 					<Add library="SDL2" />
+					<Add library="OpenAL32.dll" />
 				</Linker>
 			</Target>
 		</Build>
@@ -80,9 +82,6 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 		</Compiler>
-		<Linker>
-			<Add library="openal" />
-		</Linker>
 		<Unit filename="../README.md" />
 		<Unit filename="../myogl/src/3rd/picopng.cpp" />
 		<Unit filename="../myogl/src/animation.cpp" />

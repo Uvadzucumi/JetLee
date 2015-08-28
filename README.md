@@ -38,3 +38,5 @@ Player control keys
   Run + Left Control - Kick
   c - game pause and free camera mode
 ```
+
+Requirements: SDL2 (http://libsdl.org/), OpenGL (http://opengl.org), OpenAl (http://openal.org/).
