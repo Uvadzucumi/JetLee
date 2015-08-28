@@ -55,6 +55,8 @@ public:
     }
 
     bool loadSounds(){
+        m_initialized=true;
+
         CSoundSource *source;
         CSoundBuffer *buffer;
 
@@ -71,10 +73,12 @@ public:
     }
 
     void play(int sound){
-        if(sound<0 || sound>=sources_collection.size()){
-            logW("Wrong sound number "<<sound);
+        if(m_initialized){
+            if(sound<0 || sound>=(int)sources_collection.size()){
+                logW("Wrong sound number "<<sound);
+            }
+            sources_collection[sound]->play();
         }
-        sources_collection[sound]->play();
     }
 
 };

@@ -651,7 +651,7 @@ void CEnemy::Update(double DeltaTime){
                     }
                 }
 
-                if(this->isAction(HERO_ACTION_DOWN)){
+                if(this->isAction(HERO_ACTION_DOWN) || (this->isAction(HERO_ACTION_DIE) && !this->isDownFloor())){
                     this->m_position.y+=1*MUL_COORDS;
                 }
 
