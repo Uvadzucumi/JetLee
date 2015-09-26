@@ -345,8 +345,10 @@ void CHero::Update(double DeltaTime){
 
             if(this->actions[this->m_action].animation.isFinished()){
                 if(
+                    (
                     isAction(HERO_ACTION_CLIMB0) ||
                     isAction(HERO_ACTION_CLIMB1)
+                    ) && (App->IsKeyPressed(SDLK_UP) || App->IsKeyPressed(SDLK_DOWN) || App->IsKeyPressed(SDLK_LEFT) || App->IsKeyPressed(SDLK_RIGHT))
                 ){
                     sound->play(SOUND_STEP);
                 }
