@@ -72,7 +72,7 @@ class CSoundBuffer:public CSoundBase{
             //ALvoid *data;
             unsigned char* data=NULL;
             ALsizei size, freq;
-            ALenum format;
+            ALenum format=0;
         /*
             //ALboolean loop = AL_FALSE;
             // loading wav file
@@ -217,13 +217,21 @@ class CSoundBuffer:public CSoundBase{
         if (wave_format.numChannels == 1) {
             if (wave_format.bitsPerSample == 8 )
                 *format = AL_FORMAT_MONO8;
-            else if (wave_format.bitsPerSample == 16)
+            else if (wave_format.bitsPerSample == 16){
                 *format = AL_FORMAT_MONO16;
+            }else{
+                // wrong format
+                return false;
+            }
         } else if (wave_format.numChannels == 2) {
             if (wave_format.bitsPerSample == 8 )
                 *format = AL_FORMAT_STEREO8;
-            else if (wave_format.bitsPerSample == 16)
+            else if (wave_format.bitsPerSample == 16){
                 *format = AL_FORMAT_STEREO16;
+            }else{
+                // wrong format
+                return false;
+            }
         }
         //create our openAL buffer and check for success
         //alGenBuffers(1, buffer);
