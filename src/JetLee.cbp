@@ -23,6 +23,7 @@
 					<Add library="GL" />
 					<Add library="GLU" />
 					<Add library="SDL2" />
+					<Add library="openal" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -40,6 +41,7 @@
 					<Add library="GL" />
 					<Add library="GLU" />
 					<Add library="SDL2" />
+					<Add library="openal" />
 				</Linker>
 			</Target>
 			<Target title="Windows - Debug">
