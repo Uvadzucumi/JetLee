@@ -14,8 +14,8 @@ CTileset::CTileset(CTexture *texture, int tile_x_size, int tile_y_size){
         for(j=0;j<texture->GetWidth();j+=tile_x_size){
             sprite=new CHudSprite(texture);
             m_tiles.push_back(sprite);
-            sprite->SetUVPixelCoords(j,i,tile_x_size,tile_y_size);
-            sprite->SetSize(tile_x_size,tile_y_size);
+            sprite->setUVPixelCoords(j,i,tile_x_size,tile_y_size);
+            sprite->setSize(tile_x_size,tile_y_size);
         }
     }
     m_tile_width=tile_x_size;
@@ -41,7 +41,7 @@ void CTileset::RenderAt(int x, int y, int tile_id, CMaterial *material){
 };
 
 void CTileset::Render(int tile_id, CMaterial *material){
-    m_tiles[tile_id]->Render(material);
+    m_tiles[tile_id]->render(material);
 };
 
 void CTileset::setTileDecrease(int dec_width, int dec_height){
@@ -51,7 +51,7 @@ void CTileset::setTileDecrease(int dec_width, int dec_height){
         int new_w=m_tile_width-m_dec_width;
         int new_h=m_tile_height-m_dec_height;
         for(unsigned int i=0; i < m_tiles.size(); i++){
-            m_tiles[i]->SetSize(new_w, new_h);
+            m_tiles[i]->setSize(new_w, new_h);
         }
     }
 }

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="CPP_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/camera2d.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/hero.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/game.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/graphics.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/gamesound.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/locations.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/sound.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/jsmn/jsmn.c" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/jsmn/jsmn.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ai.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ai.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/locations.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/hero.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/graphics.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/vbo.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/config_file.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/animation.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/types.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/myogl.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/vector_types.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/material.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/config_file.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/singleton.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/tileset.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/events.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/entity.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/log.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/material.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/vbo.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/animation.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/tileset.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/light.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/base_object.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/matrix_types.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/base_object.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/3rd/picopng.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/sprites.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/matrix_types.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/shaders.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/render.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/camera.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/frame_buffer.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/entity.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/log.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/ui/text_box.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/ui/base_ui_class.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/ui/bitmap_font.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/ui/panel.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/ui/text_box.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/ui/bitmap_font.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/frame_buffer.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/texture.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/sprites.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/render.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/fileformats/bmpimage.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/fileformats/bmpimage.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/events.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/myogl.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/camera.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/texture.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/myogl/src/config.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="Header Search Paths">
+        <CLASSES>
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+        </CLASSES>
+        <SOURCES>
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+          <root url="file:///usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+          <root url="file:///usr/include" />
+          <root url="file:///usr/local/include" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+  </component>
+</module>
