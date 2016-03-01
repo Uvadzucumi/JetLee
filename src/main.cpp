@@ -14,8 +14,6 @@
 #include "graphics.h"
 #include "hero.h"
 #include "camera2d.h"
-#include "locations.h"
-#include "gamesound.h"
 
 #include<string>
 
@@ -23,6 +21,7 @@ CGameSound *sound;
 
 bool show_bboxes=false;
 bool free_cam=false;
+bool play_bg_music=true;
 
 int hero_index;
 //int hero_index=HERO_FM;
@@ -167,6 +166,17 @@ void OnLoop(double DeltaTime){
                 log("Free camera: On");
             }else{
                 log("Free camera: Off");
+            }
+        }
+
+        if(App->IsKeyDown(SDLK_s)){
+            play_bg_music=!play_bg_music;
+            if(play_bg_music){
+                sound->play(SOUND_BG_MUSIC);
+                log("Ppay BG music: On");
+            }else{
+                sound->pause(SOUND_BG_MUSIC);
+                log("Ppay BG music: Off");
             }
         }
 
@@ -376,7 +386,9 @@ int main(int argc, char **argv){
         }
 
     }
-
+    // play BG music
+    sound->setVolume(SOUND_BG_MUSIC,0.5);
+    sound->play(SOUND_BG_MUSIC);
     // Load textures & create sprites
     if(!loadGraphics(scale_factor)){
         logE("Load graphics error!");
@@ -419,6 +431,7 @@ int main(int argc, char **argv){
     App->Run();
 
     delete App;
+    delete sound;
 
     return 0;
 }

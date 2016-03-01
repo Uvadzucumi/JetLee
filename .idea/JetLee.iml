@@ -3,16 +3,17 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/camera2d.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/hero.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/sound/sound.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/sound/sound.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/gamesound.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/game.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/graphics.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/gamesound.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/locations.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/sound.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/jsmn/jsmn.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/jsmn/jsmn.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ai.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/hero.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/ai.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/locations.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/hero.h" isTestSource="false" />

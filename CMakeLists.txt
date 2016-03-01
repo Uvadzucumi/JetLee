@@ -68,11 +68,11 @@ set(SOURCE_FILES
     src/locations.cpp
     src/locations.h
     src/main.cpp
-    src/sound.h)
+    src/sound/sound.h src/sound/sound.cpp)
 
 find_package(OpenGL REQUIRED)
 find_package(OpenAL REQUIRED)
 #find_package(SDL REQUIRED)
 add_executable(JetLee ${SOURCE_FILES})
 #target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} -lSDL2)
-target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} -lSDL2)
+target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} -lSDL2 -logg -lvorbisfile)

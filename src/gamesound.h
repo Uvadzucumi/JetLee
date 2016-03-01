@@ -1,7 +1,7 @@
 #ifndef GAMESOUND_H_INCLUDED
 #define GAMESOUND_H_INCLUDED
 
-#include "sound.h"
+#include "sound/sound.h"
 
 #include <vector>
 
@@ -21,11 +21,29 @@
         buffer_collection.push_back(buffer); \
         sources_collection.push_back(source);
 
-enum {
+#define MUSIC_CREATE_MACRO(index, music_file) \
+        source=new CSoundSource(); \
+        buffer=new CSoundBuffer(); \
+        if(!buffer->loadOggFile(music_file)){ \
+            std::cout << "loading ogg file "<< music_file << " failed." << std::endl; \
+            m_initialized=false; \
+            return false; \
+        } \
+        if(!source->setBuffer(buffer->getBuffer())){ \
+            std::cout << "buffer binding error!" << std::endl; \
+            m_initialized=false; \
+            return false; \
+        } \
+        source->setLooping(true); \
+        buffer_collection.push_back(buffer); \
+        sources_collection.push_back(source);
+
+enum ESOUND{
     SOUND_STEP=0,
     SOUND_FIGHT,
     SOUND_FLARE_COLLECT,
-    SOUND_DIE
+    SOUND_DIE,
+    SOUND_BG_MUSIC
 };
 
 
@@ -43,6 +61,16 @@ public:
     }
 
     ~CGameSound(){
+        // stop play & delete sources
+        for(auto i=0; i < sources_collection.size(); ++i){
+            sources_collection[i]->stop();
+            delete sources_collection[i];
+        }
+        for(auto i=0; i < buffer_collection.size(); ++i){
+            delete buffer_collection[i];
+        }
+
+        delete m_sound_system; // close AL context & device
     }
 
     bool init(){
@@ -65,6 +93,8 @@ public:
         SOUD_CREATE_MACRO(SOUND_FLARE_COLLECT, "data/flare.wav");
         SOUD_CREATE_MACRO(SOUND_DIE, "data/die.wav");
 
+        MUSIC_CREATE_MACRO(SOUND_BG_MUSIC, "data/bg.ogg");
+
         return true;
     }
 
@@ -72,13 +102,26 @@ public:
         return sources_collection.size();
     }
 
-    void play(int sound){
+    void play(ESOUND sound){
         if(m_initialized){
             if(sound<0 || sound>=(int)sources_collection.size()){
                 logW("Wrong sound number "<<sound);
             }
             sources_collection[sound]->play();
         }
+    }
+
+    void pause(ESOUND sound){
+        if(m_initialized){
+            if(sound<0 || sound>=(int)sources_collection.size()){
+                logW("Wrong sound number "<<sound);
+            }
+            sources_collection[sound]->pause();
+        }
+    }
+
+    void setVolume(ESOUND sound, float volume){
+        sources_collection[sound]->setVolume(volume);
     }
 
 };

@@ -281,7 +281,7 @@ public:
         BBox bbox=this->getBBox();
 
         MyOGL::Vector2i left_top={bbox.left_top.x/LOCATION_GRID_SIZE, bbox.left_top.y/LOCATION_GRID_SIZE};
-        MyOGL::Vector2i right_bottom={bbox.right_bottom.x/LOCATION_GRID_SIZE+1, bbox.right_bottom.y/LOCATION_GRID_SIZE};
+        MyOGL::Vector2i right_bottom={(bbox.right_bottom.x-1)/LOCATION_GRID_SIZE+1, bbox.right_bottom.y/LOCATION_GRID_SIZE};
         // check inside block
         for(int y=left_top.y; y < right_bottom.y; y++){
             for(int x=left_top.x; x<right_bottom.x; x++){
