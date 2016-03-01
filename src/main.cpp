@@ -122,7 +122,7 @@ void OnRender(double DeltaTime){
 
         }
 
-        if(game_state==GAME_STATE_FAIL){
+        if(game_state==EGameState::GAME_STATE_FAIL){
             glLoadIdentity();
             sprites[SPRITE_ENTER_TO_CONTINUE]->setPosition(
                 (WIN_WIDTH*scale_factor-sprites[SPRITE_ENTER_TO_CONTINUE]->getWidth())/2,
@@ -149,9 +149,9 @@ void OnLoop(double DeltaTime){
 
     if(!game_over){ // not WIN
 
-        if(game_state==GAME_STATE_FAIL && App->IsKeyDown(SDLK_RETURN)){
+        if(game_state==EGameState::GAME_STATE_FAIL && App->IsKeyDown(SDLK_RETURN)){
             //
-            game_state=GAME_STATE_PLAY;
+            game_state=EGameState::GAME_STATE_PLAY;
             ((CHero *)heroes[hero_index])->goSpawnPoint();
         }
 
@@ -289,7 +289,7 @@ int main(int argc, char **argv){
     scale_factor=4;
     difficulty_level=50;
 
-    game_state=GAME_STATE_PLAY;
+    game_state=EGameState::GAME_STATE_PLAY;
 
     if(args.size()){
 

@@ -17,7 +17,7 @@
 std::vector<CBaseHero*> heroes;
 /*
 double distance(int x1, int x2, int y1, int y2){
-    return sqrt((x2 - x1)^2 - (y2 - y1)^2);
+    return sqrt(pow((x2 - x1),2) - pow((y2 - y1),2));
 }
 */
 
@@ -322,14 +322,14 @@ void CBaseHero::hitToHero(int h_index){
     if(h_index==hero_index && heroes[h_index]->getHealth()<=0){
 
         sound->play(SOUND_DIE);
-        game_state=GAME_STATE_END;
+        game_state=EGameState::GAME_STATE_END;
 
     }
 }
 
 
 void CHero::Update(double DeltaTime){
-    if(this->m_enabled && (game_state==GAME_STATE_PLAY || game_state==GAME_STATE_END)){
+    if(this->m_enabled && (game_state==EGameState::GAME_STATE_PLAY || game_state==EGameState::GAME_STATE_END)){
 
         //log("game state: "<<game_state);
 
@@ -415,7 +415,7 @@ void CHero::Update(double DeltaTime){
                                 // if another action finished - hero stay - if not die
                                 if(this->getHealth()<=0){
                                     log("game state set to FAIL");
-                                    game_state=GAME_STATE_FAIL;
+                                    game_state=EGameState::GAME_STATE_FAIL;
                                     return;
                                 }
 
@@ -570,7 +570,7 @@ void CHero::Update(double DeltaTime){
 }
 
 void CEnemy::Update(double DeltaTime){
-    if(this->m_enabled && (game_state==GAME_STATE_PLAY || game_state==GAME_STATE_END)){
+    if(this->m_enabled && (game_state==EGameState::GAME_STATE_PLAY || game_state==EGameState::GAME_STATE_END)){
         if(m_spawn_time>0){
             m_spawn_time-=DeltaTime;
         }else{

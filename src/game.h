@@ -3,18 +3,21 @@
 
 #include "../myogl/src/myogl.h"
 #include "../myogl/src/ui/panel.h"
+#include "../myogl/src/3rd/enum.h"
 #include "gamesound.h"
 
 #define SPAWN_TIME 3
 #define SPAWN_TIME_DIE 5
 
-enum{
-    GAME_STATE_PLAY=0,
-    GAME_STATE_PAUSE,
-    GAME_STATE_WIN,
-    GAME_STATE_END,
-    GAME_STATE_FAIL
-};
+BETTER_ENUM(
+        EGameState,
+        int,
+        GAME_STATE_PLAY=0,
+        GAME_STATE_PAUSE,
+        GAME_STATE_WIN,
+        GAME_STATE_END,
+        GAME_STATE_FAIL
+)
 
 extern MyOGL::CApplication *App;
 extern int hatch_flares_count;
