@@ -5,10 +5,11 @@ Jet Lee - remake of ZX spectrum video game "Bruce Lee" (1984)
 
 Created for igdc.ru contest #125
 
-![screenshot](https://raw.github.com/Uvadzucumi/jetlee/master/src/data/scr/scr-01.png)
-![screenshot](https://raw.github.com/Uvadzucumi/jetlee/master/src/data/scr/scr-02.png)
-![screenshot](https://raw.github.com/Uvadzucumi/jetlee/master/src/data/scr/scr-03.png)
+![screenshot](https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-01.png?raw=true)
+![screenshot](https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-02.png?raw=true)
+![screenshot](https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-03.png?raw=true)
 
+https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-01.png?raw=true
 
 Windows build (https://raw.github.com/Uvadzucumi/jetlee/master/bin/JetLee.zip)
 
@@ -39,4 +40,4 @@ Player control keys
   c - game pause and free camera mode
 ```
 
-Requirements: SDL2 (http://libsdl.org/), OpenGL (http://opengl.org), OpenAl (http://openal.org/).
+Requirements: SDL2 (http://libsdl.org/), OpenGL (http://opengl.org), OpenAl (http://openal.org/), libogg, libvorbisfile.
