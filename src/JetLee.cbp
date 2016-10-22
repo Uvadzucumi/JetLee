@@ -151,7 +151,6 @@
 		<Unit filename="locations.cpp" />
 		<Unit filename="locations.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="sound.h" />
 		<Unit filename="sound/sound.cpp" />
 		<Unit filename="sound/sound.h" />
 		<Extensions>

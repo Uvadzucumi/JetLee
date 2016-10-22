@@ -392,6 +392,8 @@ int main(int argc, char **argv){
     // Load textures & create sprites
     if(!loadGraphics(scale_factor)){
         logE("Load graphics error!");
+        delete sound;   // colose sound device
+        delete App;
         return -1;
     }
     log("loaded " << textures.size() << " textures" << std::endl << "initialized " << sprites.size() << " sprites.");// << std::endl;
@@ -408,7 +410,7 @@ int main(int argc, char **argv){
 
     double spawn_time=SPAWN_TIME;
 
-    for(int i=0; i<3; i++){
+    for(int i=0; i<HERO_COUNT; i++){
         if(i==hero_index){
             heroes[i]->setPosition(locations[current_location]->getHeroSpawn().x, locations[current_location]->getHeroSpawn().y);
             heroes[i]->setEnable(true);
@@ -430,8 +432,8 @@ int main(int argc, char **argv){
     // run application
     App->Run();
 
-    delete App;
     delete sound;
+    delete App;
 
     return 0;
 }

@@ -103,25 +103,30 @@ public:
     }
 
     void play(ESOUND sound){
-        if(m_initialized){
-            if(sound<0 || sound>=(int)sources_collection.size()){
-                logW("Wrong sound number "<<sound);
-            }
+        if(m_initialized && isSound(sound)){
             sources_collection[sound]->play();
         }
     }
 
     void pause(ESOUND sound){
-        if(m_initialized){
-            if(sound<0 || sound>=(int)sources_collection.size()){
-                logW("Wrong sound number "<<sound);
-            }
+        if(m_initialized && isSound(sound)){
             sources_collection[sound]->pause();
         }
     }
 
+    // check sound number in sound collection
+    bool isSound(ESOUND sound){
+        if(sound<0 || sound>=(int)sources_collection.size()){
+            logW("Wrong sound number "<<sound);
+            return false;
+        }
+        return true;
+    }
+
     void setVolume(ESOUND sound, float volume){
-        sources_collection[sound]->setVolume(volume);
+        if(m_initialized && isSound(sound)){
+            sources_collection[sound]->setVolume(volume);
+        }
     }
 
 };

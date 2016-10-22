@@ -11,7 +11,8 @@
 enum {
     HERO_SM=0,
     HERO_FM,
-    HERO_JL
+    HERO_JL,
+    HERO_COUNT
 };
 
 enum {
