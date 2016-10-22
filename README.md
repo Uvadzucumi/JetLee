@@ -41,3 +41,16 @@ Player control keys
 ```
 
 Requirements: SDL2 (http://libsdl.org/), OpenGL (http://opengl.org), OpenAl (http://openal.org/), libogg, libvorbisfile.
+
+Compile from sources
+--------------------
+
+Install Requirements in Debian/Ubuntu OS
+```
+sudo apt-get install g++ cmake libgl1-mesa-dev libsdl2-dev libopenal-dev libogg-dev libvorbis-dev
+```
+Compile
+```
+cmake .
+make
+```
