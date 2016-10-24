@@ -401,8 +401,7 @@ int main(int argc, char **argv){
     initHeroObjects(scale_factor, hero_index);
     log( "initialized " << heroes.size() << " heroes." );
 
-    //initLocations(scale_factor);
-    initLocationsNew(scale_factor);
+    initLocations(scale_factor);
 
     log( "initialised " << locations.size() << " locations." );
 

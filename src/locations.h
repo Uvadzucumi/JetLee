@@ -205,7 +205,6 @@ class CLocation{
 extern std::vector<CLocation*> locations;
 extern int current_location;
 
-extern void initLocations(int scale_factor);
-extern bool initLocationsNew(int scale_factor);
+extern bool initLocations(int scale_factor);
 
 #endif // LOCATIONS_H_INCLUDED

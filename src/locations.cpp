@@ -7,7 +7,7 @@
 std::vector<CLocation*> locations;
 int current_location=0;
 
-bool initLocationsNew(int scale_factor){
+bool initLocations(int scale_factor){
 
     CLocation *loc;
 
@@ -92,7 +92,7 @@ bool initLocationsNew(int scale_factor){
             loc->addPortal(x, y, w, h, warp_location, hero_spawn, enemy_spawn);
         }
 
-        // set default spawnd if founded
+        // set default spawns if founded
 
         MyOGL::Vector2i hero_spawn(location["hero_spawn"].get("x",0).asInt(),location["hero_spawn"].get("y",0).asInt());
         MyOGL::Vector2i enemy_spawn(location["enemy_spawn"].get("x",0).asInt(),location["enemy_spawn"].get("y",0).asInt());
