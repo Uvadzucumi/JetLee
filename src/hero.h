@@ -262,8 +262,8 @@ public:
 
         for(int i=down.x; i<(down.x+width); i++){
             if(
-                locations[current_location]->isTile(i, down.y, TILE_WALL) ||
-                locations[current_location]->isTile(i, down.y, TILE_STAIRS)
+                locations[current_location]->isTile(i, down.y, EBlockTypes::TILE_WALL) ||
+                locations[current_location]->isTile(i, down.y, EBlockTypes::TILE_STAIRS)
             ){
                 return true;
             }

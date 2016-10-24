@@ -51,11 +51,6 @@ set(SOURCE_FILES
     myogl/src/vbo.cpp
     myogl/src/vbo.h
     myogl/src/vector_types.h
-    #src/jsmn/example/jsondump.c
-    #src/jsmn/example/simple.c
-    src/jsmn/jsmn.c
-    src/jsmn/jsmn.h
-    #src/jsmn/jsmn_test.c
     src/ai.cpp
     src/ai.h
     src/camera2d.h
@@ -68,7 +63,12 @@ set(SOURCE_FILES
     src/locations.cpp
     src/locations.h
     src/main.cpp
-    src/sound/sound.h src/sound/sound.cpp)
+    src/sound/sound.h
+    src/sound/sound.cpp
+    #src/json/json.h
+    #src/json/json-forwards.h
+    src/json/jsoncpp.cpp
+        )
 
 find_package(OpenGL REQUIRED)
 find_package(OpenAL REQUIRED)

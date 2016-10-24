@@ -438,7 +438,7 @@ void CHero::Update(double DeltaTime){
                 this->isAction(HERO_ACTION_JUMP) ||
                 this->isAction(HERO_ACTION_DIE)){
                 // check for wall
-                    if(this->isInsideBlock(TILE_WALL)){
+                    if(this->isInsideBlock(EBlockTypes::TILE_WALL)){
                         //std::cout << "WALL!!! need BACK!!! " << delta_pos.x << std::endl;
                         this->m_position.x-=delta_pos.x*MUL_COORDS;
                     }
@@ -453,7 +453,7 @@ void CHero::Update(double DeltaTime){
                     setAction(HERO_ACTION_CLIMB0);
                 }
                 // check for finish climb
-                if(!isInsideBlock(TILE_STAIRS)){
+                if(!isInsideBlock(EBlockTypes::TILE_STAIRS)){
                     //this->m_position.y-=2;    // HACK FOR Y COORD FIX
                     setAction(HERO_ACTION_STAY);
                 }
@@ -505,25 +505,25 @@ void CHero::Update(double DeltaTime){
             }
 
             // check flares
-            if(isInsideBlock(TILE_FLARE)){
+            if(isInsideBlock(EBlockTypes::TILE_FLARE)){
                 MyOGL::Vector2i coords=this->getFoundInsideBlock();
                 if(locations[current_location]->collectFlareByCoords(coords.x, coords.y)){
                     sound->play(SOUND_FLARE_COLLECT);
                     hatch_flares_count-=1;
                     if(!hatch_flares_count){
                         // open hatch
-                        locations[1]->addBlocked(19,30,3,1,TILE_EMPTY);
+                        locations[1]->addBlock(19,30,3,1,EBlockTypes::TILE_EMPTY);
                         locations[1]->addPortal(19,30,3,1,3,MyOGL::Vector2i(0,0),MyOGL::Vector2i(0,0));
                         //std::cout << "Hatch unlocked!" << std::endl;
                     }
                 }
             }
 
-            if(this->isAction(HERO_ACTION_UP) && isInsideBlock(TILE_STAIRS)){
+            if(this->isAction(HERO_ACTION_UP) && isInsideBlock(EBlockTypes::TILE_STAIRS)){
                 this->setAction(HERO_ACTION_CLIMB0);
             }
 
-            if(this->isInsideBlock(TILE_PORTAL)){
+            if(this->isInsideBlock(EBlockTypes::TILE_PORTAL)){
                 // get portal coords & move to next level
                 //std::cout << "PORTAL " << this->getFoundInsideBlock().x << "," << this->getFoundInsideBlock().y << std::endl;
                 SPortal portal=locations[current_location]->getPortalByCoords(this->getFoundInsideBlock().x, this->getFoundInsideBlock().y);;
@@ -640,7 +640,7 @@ void CEnemy::Update(double DeltaTime){
                     this->isAction(HERO_ACTION_JUMP) ||
                     this->isAction(HERO_ACTION_DIE)){
                     // check for wall
-                        if(this->isInsideBlock(TILE_WALL)){
+                        if(this->isInsideBlock(EBlockTypes::TILE_WALL)){
                             //std::cout << "WALL!!! need BACK!!! " << delta_pos.x << std::endl;
                             this->m_position.x-=delta_pos.x*MUL_COORDS;
                         }

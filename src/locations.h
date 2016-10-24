@@ -3,6 +3,7 @@
 
 #include "../myogl/src/vector_types.h"
 #include "graphics.h"
+#include "../myogl/src/3rd/enum.h"
 
 
 #define LOCATION_GRID_SIZE 4
@@ -25,13 +26,16 @@ typedef struct{
     int location;
 } SPortal;
 
-enum {
-    TILE_EMPTY,
-    TILE_FLARE,
-    TILE_WALL,
-    TILE_PORTAL,
-    TILE_STAIRS
-};
+
+BETTER_ENUM(
+        EBlockTypes,
+        int,
+        TILE_EMPTY=0,
+        TILE_FLARE,
+        TILE_WALL,
+        TILE_PORTAL,
+        TILE_STAIRS
+)
 
 
 class CLocation{
@@ -55,12 +59,12 @@ class CLocation{
             display_blocks=false;
             for(int y=0; y<LOCATION_GRID_HEIGHT; y++){
                 for(int x=0; x<LOCATION_GRID_WIDTH; x++){
-                    map_blocks[y][x]=TILE_EMPTY;
+                    map_blocks[y][x]=EBlockTypes::TILE_EMPTY;
                 }
             }
         }
 
-        void addBlocked(int x, int y, int w, int h=1, int block_type=TILE_WALL){
+        void addBlock(int x, int y, int w, int h=1, int block_type=EBlockTypes::TILE_WALL){
 
             for(int dy=y; dy<(y+h);dy++){
                 for(int dx=x; dx<(x+w); dx++){
@@ -79,7 +83,7 @@ class CLocation{
             flare.position.x=x;
             flare.position.y=y;
             flare.collected=false;
-            map_blocks[y][x]=TILE_FLARE;
+            map_blocks[y][x]=EBlockTypes::TILE_FLARE;
             flares.push_back(flare);
         }
 
@@ -119,8 +123,8 @@ class CLocation{
         }
 
         bool collectFlareByCoords(int x, int y){
-            if(this->isTile(x, y, TILE_FLARE)){
-                map_blocks[y][x]=TILE_EMPTY;
+            if(this->isTile(x, y, EBlockTypes::TILE_FLARE)){
+                map_blocks[y][x]=EBlockTypes::TILE_EMPTY;
                 for(int i=0; i < (int)flares.size(); i++){
                     if(flares[i].position.x==x && flares[i].position.y==y){
                         flares[i].collected=true;
@@ -132,7 +136,7 @@ class CLocation{
         }
 
         void addPortal(int x, int y, int w, int h, int location, MyOGL::Vector2i hero_spawn, MyOGL::Vector2i enemy_spawn){
-            this->addBlocked(x, y, w, h, TILE_PORTAL);
+            this->addBlock(x, y, w, h, EBlockTypes::TILE_PORTAL);
             SPortal portal;
             portal.x=x;
             portal.y=y;
@@ -172,15 +176,15 @@ class CLocation{
             if(this->display_blocks){
                 for(int y=0; y<LOCATION_GRID_HEIGHT; y++){
                     for(int x=0; x<LOCATION_GRID_WIDTH; x++){
-                        if(map_blocks[y][x]!=TILE_EMPTY){
+                        if(map_blocks[y][x]!=EBlockTypes::TILE_EMPTY){
                             int sprite_index;
-                            if(map_blocks[y][x]==TILE_WALL){
+                            if(map_blocks[y][x]==EBlockTypes::TILE_WALL){
                                 sprite_index=SPRITE_DEBUG_BLOCK;
-                            }else if(map_blocks[y][x]==TILE_FLARE){
+                            }else if(map_blocks[y][x]==EBlockTypes::TILE_FLARE){
                                 sprite_index=SPRITE_DEBUG_FLARE;
-                            }else if(map_blocks[y][x]==TILE_STAIRS){
+                            }else if(map_blocks[y][x]==EBlockTypes::TILE_STAIRS){
                                 sprite_index=SPRITE_DEBUG_STAIRS;
-                            }else if(map_blocks[y][x]==TILE_PORTAL){
+                            }else if(map_blocks[y][x]==EBlockTypes::TILE_PORTAL){
                                 sprite_index=SPRITE_DEBUG_PORTAL;
                             }
 
@@ -202,5 +206,6 @@ extern std::vector<CLocation*> locations;
 extern int current_location;
 
 extern void initLocations(int scale_factor);
+extern bool initLocationsNew(int scale_factor);
 
 #endif // LOCATIONS_H_INCLUDED

@@ -2,146 +2,110 @@
 #include "locations.h"
 #include "game.h"
 
+#include "json/json.h"
+
 std::vector<CLocation*> locations;
 int current_location=0;
 
-void initLocations(int scale_factor){
+bool initLocationsNew(int scale_factor){
 
     CLocation *loc;
 
+    Json::Value root;   // will contains the root value after parsing.
+    Json::Reader reader;
 
-    loc = new CLocation();
-    loc->setSpriteIndex(SPRITE_LOCATION0);
-    loc->setScaleFactor(scale_factor);
-    // midle floor
-    loc->addFlare(29,15);
-    loc->addFlare(40,15);
-    // bottom floor
-    loc->addFlare( 3,24);
-    loc->addFlare(22,24);
-    loc->addFlare(40,24);
-    // upper floor
-    loc->addBlocked(0,12,15);
-    loc->addBlocked(18,12,6);
-    loc->addBlocked(29,12,13);
-    // midle floor
-    loc->addBlocked(0,19,4);
-    loc->addBlocked(6,21,5);
-    loc->addBlocked(22,21,20);
-    // ground floor
-    loc->addBlocked(0,30,42);
-    // walls
-    loc->addBlocked(0,15,1,15); // left
-    loc->addBlocked(41,22,1,8); // right
-    loc->addBlocked(1,8,3,4); // peyote
-    // stairs
-    loc->addBlocked(15,12,3,14,TILE_STAIRS); // stair
+    // read JSON file to string
+    std::ifstream t("data/locations.json");
+    t.seekg(0, std::ios::end);
+    size_t size = t.tellg();
+    std::string buffer(size, ' ');
+    t.seekg(0);
+    t.read(&buffer[0], size);
 
-    //loc->addBlocked(41,6,1,6,TILE_PORTAL); // portal
-    loc->addPortal(41, 6, 1, 6, 1, MyOGL::Vector2i(8,48), MyOGL::Vector2i(8,48));
-    //loc->addBlocked(41,15,1,6,TILE_PORTAL); // portal
-    loc->addPortal(41, 15, 1, 6, 1, MyOGL::Vector2i(8,84), MyOGL::Vector2i(8,48));
-    // start game spawn points
-    loc->setHeroSpawn(52,48);
-    loc->setEnemySpawn(156,48);
+    std::cout << buffer << std::endl;
 
-    std::cout << "location: " << locations.size() << " flares: " << loc->getFlaresCount() << std::endl;
-    hatch_flares_count+=loc->getFlaresCount();
 
-    locations.push_back(loc); // END LOCATION0
+    bool parsingSuccessful = reader.parse( buffer, root );
+    if ( !parsingSuccessful )
+    {
+        // report to the user the failure and their locations in the document.
+        std::cout  << "Failed to parse locations.json\n"
+                   << reader.getFormattedErrorMessages();
+        return false;
+    }
 
-//////////////////////////////////////// LOCATION 1 //////////////////////////////////////////////////////////////////////
-    loc = new CLocation();
-    loc->setSpriteIndex(SPRITE_LOCATION1);
-    loc->setScaleFactor(scale_factor);
+    const Json::Value locations_list = root["locations"];
+    for(int i=0; i<locations_list.size(); ++i){
+        const Json::Value location = locations_list[i];
+        // get location
 
-    // upper floor
-    loc->addBlocked(0,12,10);
-    loc->addBlocked(15,12,4);
-    loc->addBlocked(22,12,4);
-    loc->addBlocked(31,12,11);
+        std::cout << "parse location [" << i << "]\n";
 
-    // middle floor
-    loc->addBlocked(0,21,15);
-    loc->addBlocked(26,21,16);
+        int location_id  =  location["location"].asInt();
+        int sprite_index = location["sprite_index"].asInt();
 
-    // ground floor
-    loc->addBlocked(0,30,42);
+        loc = new CLocation();
+        loc->setSpriteIndex(sprite_index);
+        loc->setScaleFactor(scale_factor);
 
-    // walls
-    loc->addBlocked(0,24,1,6); // left
-    loc->addBlocked(41,15,1,15); // right
 
-    //stairs
-    loc->addBlocked(19,12,3,5,TILE_STAIRS); // stair
-    loc->addBlocked(19,21,3,5,TILE_STAIRS); // stair
+        const Json::Value blocks = location["blocks"];
+        std::cout << "found " << blocks.size() << " blocks\n";
+        for(int j=0; j<blocks.size(); ++j){
+            int x = blocks[j].get("x",0).asInt();
+            int y = blocks[j].get("y",0).asInt();
+            int w = blocks[j].get("w",0).asInt();
+            int h = blocks[j].get("h",0).asInt();
+            std::string type=blocks[j].get("type","").asString();
+            int block_type = EBlockTypes::_from_string(type.c_str());
+            std::cout << "block [" << j<< "] x: " << x << " y: " << y << " w: " << w << " h: " << h << " type: " << block_type << " (" << type << ") " << std::endl;
+            loc->addBlock(x, y, w, h, block_type);
+        }
 
-    // portals
-    loc->addPortal(0, 6, 1, 6, 0, MyOGL::Vector2i(156, 48), MyOGL::Vector2i(156,48));
-    loc->addPortal(0, 15, 1, 6, 0, MyOGL::Vector2i(156, 84), MyOGL::Vector2i(156,48));
-    loc->addPortal(41, 6, 1, 6, 2, MyOGL::Vector2i(8, 48), MyOGL::Vector2i(8,48));
+        const Json::Value flares = location["flares"];
+        std::cout << "found " << flares.size() << " flares\n";
 
-    loc->addFlare(9,15);
-    loc->addFlare(31,15);
+        for(int j=0; j<flares.size(); ++j){
+            int x = flares[j].get("x",0).asInt();
+            int y = flares[j].get("y",0).asInt();
+            std::cout << "flare [" << j<< "] x: " << x << " y: " << y << std::endl;
+            loc->addFlare(x,y);
+        }
 
-    loc->addFlare(3,24);
-    loc->addFlare(14,24);
-    loc->addFlare(26,24);
-    loc->addFlare(38,24);
+        hatch_flares_count+=flares.size();
 
-    std::cout << "location: " << locations.size() << " flares: " << loc->getFlaresCount() << std::endl;
-    hatch_flares_count+=loc->getFlaresCount();
+        const Json::Value portals = location["portals"];
+        std::cout << "found " << portals.size() << " portals\n";
 
-    locations.push_back(loc);
+        for(int j=0; j<portals.size(); ++j){
+            int x = portals[j].get("x",0).asInt();
+            int y = portals[j].get("y",0).asInt();
+            int w = portals[j].get("w",0).asInt();
+            int h = portals[j].get("h",0).asInt();
+            int warp_location = portals[j].get("warp_location",0).asInt();
+            MyOGL::Vector2i hero_spawn(portals[j]["hero_spawn"].get("x",0).asInt(),portals[j]["hero_spawn"].get("y",0).asInt());
+            MyOGL::Vector2i enemy_spawn(portals[j]["enemy_spawn"].get("x",0).asInt(),portals[j]["enemy_spawn"].get("y",0).asInt());
+            std::string type=blocks[j].get("type","").asString();
+            std::cout << "portal [" << j<< "] x: " << x << " y: " << y << " w: " << w << " h: " << h << " warp to: " << \
+               warp_location << " h spawn: " << hero_spawn << "e spawn: " << enemy_spawn << std::endl;
 
-////////////////////// location 2 ////////////////////////////////////////////////////////////////////////////////////////////
+            loc->addPortal(x, y, w, h, warp_location, hero_spawn, enemy_spawn);
+        }
 
-    loc = new CLocation();
-    loc->setSpriteIndex(SPRITE_LOCATION2);
-    loc->setScaleFactor(scale_factor);
+        // set default spawnd if founded
 
-    // upper floor
-    loc->addBlocked(0,12,10);
-    loc->addBlocked(14,12,3);
-    loc->addBlocked(20,12,7);
-    loc->addBlocked(30,12,12);
+        MyOGL::Vector2i hero_spawn(location["hero_spawn"].get("x",0).asInt(),location["hero_spawn"].get("y",0).asInt());
+        MyOGL::Vector2i enemy_spawn(location["enemy_spawn"].get("x",0).asInt(),location["enemy_spawn"].get("y",0).asInt());
 
-    // middle floor
-    loc->addBlocked(0,21,5);
-    loc->addBlocked(9,21,7);
-    loc->addBlocked(21,21,7);
-    loc->addBlocked(34,21,5);
+        loc->setHeroSpawn(hero_spawn.x, hero_spawn.y);
+        loc->setEnemySpawn(enemy_spawn.x, enemy_spawn.y);
 
-    // ground floor
-    loc->addBlocked(0,30,42);
+        std::cout << "defaul spawn h: " << hero_spawn << " default spawn e: " << enemy_spawn << std::endl;
 
-    // walls
-    loc->addBlocked(0,15,1,15);
-    loc->addBlocked(41,15,1,15);
-    loc->addBlocked(31,15,1,7);
-    loc->addBlocked(35,8,3,4); // peyote
+        locations.push_back(loc);
 
-    // stairs
-    loc->addBlocked(17,12,3,14,TILE_STAIRS); // stair
+    }
 
-    // portals
-    loc->addPortal(0, 6, 1, 6, 1, MyOGL::Vector2i(156, 48), MyOGL::Vector2i(156,48));
-
-    loc->addFlare(4, 15);
-    loc->addFlare(9, 15);
-    loc->addFlare(23, 15);
-    loc->addFlare(26, 15);
-    loc->addFlare(30, 15);
-
-    loc->addFlare(4, 24);
-    loc->addFlare(9, 24);
-    loc->addFlare(15, 24);
-    loc->addFlare(21, 24);
-    loc->addFlare(27, 24);
-
-    std::cout << "location: " << locations.size() << " flares: " << loc->getFlaresCount() << std::endl;
-    hatch_flares_count+=loc->getFlaresCount();
-
-    locations.push_back(loc);
+    return true;
 
 }
