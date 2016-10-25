@@ -2,55 +2,56 @@
 #define GRAPHICS_H_INCLUDED
 
 #include "../myogl/src/myogl.h"
+#include "../myogl/src/3rd/enum.h"
 
 #include <vector>
 #include <string>
 
-enum {
+BETTER_ENUM(ESprites, int,
     // SM (0)
-    SPRITE_SM_STAY=0,
-    SPRITE_SM_RUN0,
-    SPRITE_SM_RUN1,
-    SPRITE_SM_PUSH,
-    SPRITE_SM_DIE,
+    SM_STAY=0,
+    SM_RUN0,
+    SM_RUN1,
+    SM_PUSH,
+    SM_DIE,
     // FM (5)
-    SPRITE_FM_STAY,
-    SPRITE_FM_RUN0,
-    SPRITE_FM_RUN1,
-    SPRITE_FM_UP,
-    SPRITE_FM_DOWN,
-    SPRITE_FM_CLIMB0,
-    SPRITE_FM_CLIMB1,
-    SPRITE_FM_PUSH,
-    SPRITE_FM_KICK,
-    SPRITE_FM_DIE,
+    FM_STAY,
+    FM_RUN0,
+    FM_RUN1,
+    FM_UP,
+    FM_DOWN,
+    FM_CLIMB0,
+    FM_CLIMB1,
+    FM_PUSH,
+    FM_KICK,
+    FM_DIE,
     // JL (15)
-    SPRITE_JL_STAY,
-    SPRITE_JL_RUN0,
-    SPRITE_JL_RUN1,
-    SPRITE_JL_UP,
-    SPRITE_JL_DOWN,
-    SPRITE_JL_CLIMB0,
-    SPRITE_JL_CLIMB1,
-    SPRITE_JL_PUSH,
-    SPRITE_JL_KICK,
-    SPRITE_JL_JUMP,
-    SPRITE_JL_DIE,
-    SPRITE_JL_HIDE,
+    JL_STAY,
+    JL_RUN0,
+    JL_RUN1,
+    JL_UP,
+    JL_DOWN,
+    JL_CLIMB0,
+    JL_CLIMB1,
+    JL_PUSH,
+    JL_KICK,
+    JL_JUMP,
+    JL_DIE,
+    JL_HIDE,
     // GAME OBJECTS
-    SPRITE_FLARE,
+    FLARE,
     // LOCATIONS
-    SPRITE_LOCATION0,
-    SPRITE_LOCATION1,
-    SPRITE_LOCATION2,
+    LOCATION0,
+    LOCATION1,
+    LOCATION2,
 
-    SPRITE_DEBUG_BLOCK,
-    SPRITE_DEBUG_FLARE,
-    SPRITE_DEBUG_STAIRS,
-    SPRITE_DEBUG_PORTAL,
-    SPRITE_CONGRATULATION,
-    SPRITE_ENTER_TO_CONTINUE,
-};
+    DEBUG_BLOCK,
+    DEBUG_FLARE,
+    DEBUG_STAIRS,
+    DEBUG_PORTAL,
+    CONGRATULATION,
+    ENTER_TO_CONTINUE
+)
 
 extern std::vector<MyOGL::CTexture*> textures;
 extern std::vector<MyOGL::CHudSprite*> sprites;

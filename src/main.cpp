@@ -41,8 +41,8 @@ void OnRender(double DeltaTime){
     MyOGL::Render->ClearScreen();
 
     if(game_over){
-        sprites[SPRITE_CONGRATULATION]->setPosition(0,0);
-        sprites[SPRITE_CONGRATULATION]->render();
+        sprites[ESprites::CONGRATULATION]->setPosition(0,0);
+        sprites[ESprites::CONGRATULATION]->render();
     }else{
         if(!free_cam){
             camera->moveBetterViewPositionFor(heroes[hero_index]->getPosition().x, heroes[hero_index]->getPosition().y);
@@ -112,10 +112,10 @@ void OnRender(double DeltaTime){
             for(int y=left_top.y; y < right_bottom.y; y++){
                 for(int x=left_top.x; x<right_bottom.x; x++){
 
-                    sprites[SPRITE_DEBUG_PORTAL]->setPosition(
+                    sprites[ESprites::DEBUG_PORTAL]->setPosition(
                         (x * LOCATION_GRID_SIZE) * scale_factor,
                         (y * LOCATION_GRID_SIZE) * scale_factor);
-                    sprites[SPRITE_DEBUG_PORTAL]->render();
+                    sprites[ESprites::DEBUG_PORTAL]->render();
 
                 }
             }
@@ -124,11 +124,11 @@ void OnRender(double DeltaTime){
 
         if(game_state==EGameState::GAME_STATE_FAIL){
             glLoadIdentity();
-            sprites[SPRITE_ENTER_TO_CONTINUE]->setPosition(
-                (WIN_WIDTH*scale_factor-sprites[SPRITE_ENTER_TO_CONTINUE]->getWidth())/2,
-                (WIN_HEIGHT*scale_factor-sprites[SPRITE_ENTER_TO_CONTINUE]->getHeight())/2
+            sprites[ESprites::ENTER_TO_CONTINUE]->setPosition(
+                (WIN_WIDTH*scale_factor-sprites[ESprites::ENTER_TO_CONTINUE]->getWidth())/2,
+                (WIN_HEIGHT*scale_factor-sprites[ESprites::ENTER_TO_CONTINUE]->getHeight())/2
             );
-            sprites[SPRITE_ENTER_TO_CONTINUE]->render();
+            sprites[ESprites::ENTER_TO_CONTINUE]->render();
         }
     }
 
@@ -392,7 +392,7 @@ int main(int argc, char **argv){
     // Load textures & create sprites
     if(!loadGraphics(scale_factor)){
         logE("Load graphics error!");
-        delete sound;   // colose sound device
+        delete sound;   // close sound device
         delete App;
         return -1;
     }

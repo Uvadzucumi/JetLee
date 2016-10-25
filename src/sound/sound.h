@@ -16,6 +16,13 @@
 
 #define BUFFER_SIZE 32768       // 32 KB buffers
 
+enum ESoundState {
+    ESS_NOT_INICIALIZED,
+    ESS_STOPPED=0,
+    ESS_PAUSED,
+    ESS_PLAYING
+};
+
 /*
  * Struct that holds the RIFF data of the Wave file.
  * The RIFF data is the meta data information that holds,
@@ -133,6 +140,7 @@ class CSoundBuffer:public CSoundBase{
 class CSoundSource:public CSoundBase{
 
         ALuint m_source;
+        ESoundState m_state=ESS_NOT_INICIALIZED;
 
     public:
 
@@ -189,15 +197,18 @@ class CSoundSource:public CSoundBase{
             if(isError()){
                 return false;
             }
+            m_state=ESS_PLAYING;
             return true;
         }
 
         void stop(){
             alSourceStop(m_source);
+            m_state=ESS_STOPPED;
         }
 
         void pause(){
             alSourcePause(m_source);
+            m_state=ESS_PAUSED;
         }
 
 };

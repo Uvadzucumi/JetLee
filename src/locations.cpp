@@ -22,7 +22,7 @@ bool initLocations(int scale_factor){
     t.seekg(0);
     t.read(&buffer[0], size);
 
-    std::cout << buffer << std::endl;
+    //std::cout << buffer << std::endl;
 
 
     bool parsingSuccessful = reader.parse( buffer, root );

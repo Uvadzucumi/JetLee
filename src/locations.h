@@ -166,10 +166,10 @@ class CLocation{
             for(int i=0; i < (int)flares.size(); i++){
                 if(!flares[i].collected){
                 // render flare
-                    sprites[SPRITE_FLARE]->setPosition(
+                    sprites[ESprites::FLARE]->setPosition(
                         (flares[i].position.x * LOCATION_GRID_SIZE-1) * m_scale_factor,
                         (flares[i].position.y * LOCATION_GRID_SIZE-1) * m_scale_factor);
-                    sprites[SPRITE_FLARE]->render();
+                    sprites[ESprites::FLARE]->render();
                 }
             }
 
@@ -179,13 +179,13 @@ class CLocation{
                         if(map_blocks[y][x]!=EBlockTypes::TILE_EMPTY){
                             int sprite_index;
                             if(map_blocks[y][x]==EBlockTypes::TILE_WALL){
-                                sprite_index=SPRITE_DEBUG_BLOCK;
+                                sprite_index=ESprites::DEBUG_BLOCK;
                             }else if(map_blocks[y][x]==EBlockTypes::TILE_FLARE){
-                                sprite_index=SPRITE_DEBUG_FLARE;
+                                sprite_index=ESprites::DEBUG_FLARE;
                             }else if(map_blocks[y][x]==EBlockTypes::TILE_STAIRS){
-                                sprite_index=SPRITE_DEBUG_STAIRS;
+                                sprite_index=ESprites::DEBUG_STAIRS;
                             }else if(map_blocks[y][x]==EBlockTypes::TILE_PORTAL){
-                                sprite_index=SPRITE_DEBUG_PORTAL;
+                                sprite_index=ESprites::DEBUG_PORTAL;
                             }
 
                             sprites[sprite_index]->setPosition(

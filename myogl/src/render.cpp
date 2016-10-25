@@ -148,6 +148,9 @@ bool CRender::Init(int width, int height, int bpp, bool full_screen, const char 
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
 
+    //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 0);
+    //SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+
     // Color Buffer
     SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, this->m_bpp);
     // Depth buffer 24bit

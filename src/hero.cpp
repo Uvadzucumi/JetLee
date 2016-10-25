@@ -38,11 +38,11 @@ void initHeroObjects(int scale_factor, int hero_index){
     }
     hero->setScaleFactor(scale_factor);
     // sprites by hero position
-    hero->addStateSprite(SPRITE_SM_STAY, -3, -11, 5, 11, true);
-    hero->addStateSprite(SPRITE_SM_RUN0, -5, -14, 6, 11, true);
-    hero->addStateSprite(SPRITE_SM_RUN1, -6, -14, 4, 11, true);
-    hero->addStateSprite(SPRITE_SM_PUSH, -3, -11, 5, 11, true);
-    hero->addStateSprite(SPRITE_SM_DIE,  -5, -6, 8, 6, true);
+    hero->addStateSprite(ESprites::SM_STAY, -3, -11, 5, 11, true);
+    hero->addStateSprite(ESprites::SM_RUN0, -5, -14, 6, 11, true);
+    hero->addStateSprite(ESprites::SM_RUN1, -6, -14, 4, 11, true);
+    hero->addStateSprite(ESprites::SM_PUSH, -3, -11, 5, 11, true);
+    hero->addStateSprite(ESprites::SM_DIE,  -5, -6, 8, 6, true);
 
     //action.delta_position.clear();
     //action.state_sprite_indexes.clear();
@@ -88,16 +88,16 @@ void initHeroObjects(int scale_factor, int hero_index){
         hero=new CHero();
     }
     hero->setScaleFactor(scale_factor);
-    hero->addStateSprite(SPRITE_FM_STAY, -7, -14, 8, 14, true);    // 0
-    hero->addStateSprite(SPRITE_FM_RUN0, -7, -14, 8, 14, true);    // 1
-    hero->addStateSprite(SPRITE_FM_RUN1, -7, -14, 8, 14, true);    // 2
-    hero->addStateSprite(SPRITE_FM_UP, -6, -14, 8, 14, false);     // 3
-    hero->addStateSprite(SPRITE_FM_DOWN, -7, -14, 8, 14, false);   // 4
-    hero->addStateSprite(SPRITE_FM_CLIMB0, -7, -14, 8, 14, false); // 5
-    hero->addStateSprite(SPRITE_FM_CLIMB1, -6, -14, 8, 14, false); // 6
-    hero->addStateSprite(SPRITE_FM_PUSH, -6, -14, 8, 14, true);    // 7
-    hero->addStateSprite(SPRITE_FM_KICK, -7, -12, 10, 12, true);   // 8
-    hero->addStateSprite(SPRITE_FM_DIE, -8, -11, 14, 11, true);    // 9
+    hero->addStateSprite(ESprites::FM_STAY, -7, -14, 8, 14, true);    // 0
+    hero->addStateSprite(ESprites::FM_RUN0, -7, -14, 8, 14, true);    // 1
+    hero->addStateSprite(ESprites::FM_RUN1, -7, -14, 8, 14, true);    // 2
+    hero->addStateSprite(ESprites::FM_UP, -6, -14, 8, 14, false);     // 3
+    hero->addStateSprite(ESprites::FM_DOWN, -7, -14, 8, 14, false);   // 4
+    hero->addStateSprite(ESprites::FM_CLIMB0, -7, -14, 8, 14, false); // 5
+    hero->addStateSprite(ESprites::FM_CLIMB1, -6, -14, 8, 14, false); // 6
+    hero->addStateSprite(ESprites::FM_PUSH, -6, -14, 8, 14, true);    // 7
+    hero->addStateSprite(ESprites::FM_KICK, -7, -12, 10, 12, true);   // 8
+    hero->addStateSprite(ESprites::FM_DIE, -8, -11, 14, 11, true);    // 9
 
     //action.delta_position.clear();
     //action.state_sprite_indexes.clear();
@@ -174,18 +174,18 @@ void initHeroObjects(int scale_factor, int hero_index){
     }
     hero->setScaleFactor(scale_factor);
 
-    hero->addStateSprite(SPRITE_JL_STAY, -4, -14, 6, 14, true);     //0
-    hero->addStateSprite(SPRITE_JL_RUN0, -5, -14, 7, 14, true);     //1
-    hero->addStateSprite(SPRITE_JL_RUN1, -3, -14, 6, 14, true);     //2
-    hero->addStateSprite(SPRITE_JL_UP, -4, -14, 5, 14, false);      //3
-    hero->addStateSprite(SPRITE_JL_DOWN, -5, -14, 5, 14, false);    //4
-    hero->addStateSprite(SPRITE_JL_CLIMB0, -5, -14, 7, 14, false);  //5
-    hero->addStateSprite(SPRITE_JL_CLIMB1, -5, -14, 7, 14, false);  //6
-    hero->addStateSprite(SPRITE_JL_PUSH, -5, -14, 8, 14, true);     //7
-    hero->addStateSprite(SPRITE_JL_KICK, -5, -8, 8, 8, true);       //8
-    hero->addStateSprite(SPRITE_JL_JUMP, -5, -14, 9, 14, true);     //9
-    hero->addStateSprite(SPRITE_JL_DIE, -8, -7, 12, 7, true);       //10
-    hero->addStateSprite(SPRITE_JL_HIDE, -9, -7, 14, 7, true);      //11
+    hero->addStateSprite(ESprites::JL_STAY, -4, -14, 6, 14, true);     //0
+    hero->addStateSprite(ESprites::JL_RUN0, -5, -14, 7, 14, true);     //1
+    hero->addStateSprite(ESprites::JL_RUN1, -3, -14, 6, 14, true);     //2
+    hero->addStateSprite(ESprites::JL_UP, -4, -14, 5, 14, false);      //3
+    hero->addStateSprite(ESprites::JL_DOWN, -5, -14, 5, 14, false);    //4
+    hero->addStateSprite(ESprites::JL_CLIMB0, -5, -14, 7, 14, false);  //5
+    hero->addStateSprite(ESprites::JL_CLIMB1, -5, -14, 7, 14, false);  //6
+    hero->addStateSprite(ESprites::JL_PUSH, -5, -14, 8, 14, true);     //7
+    hero->addStateSprite(ESprites::JL_KICK, -5, -8, 8, 8, true);       //8
+    hero->addStateSprite(ESprites::JL_JUMP, -5, -14, 9, 14, true);     //9
+    hero->addStateSprite(ESprites::JL_DIE, -8, -7, 12, 7, true);       //10
+    hero->addStateSprite(ESprites::JL_HIDE, -9, -7, 14, 7, true);      //11
 
     NEW_HERO_ACTION_MACRO(HERO_ACTION_STAY, 1);
     ADD_ACTION_KEYFRAME_MACRO(0,0,0);
