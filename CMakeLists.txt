@@ -83,4 +83,5 @@ find_package(SDL2 REQUIRED)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .)
 add_executable(JetLee ${SOURCE_FILES})
 target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${OPENAL_LIBRARY} -lvorbisfile -logg)
+#target_link_libraries(JetLee ${OPENGL_LIBRARIES} -lSDL2 ${OPENAL_LIBRARY} -lvorbisfile -logg)
 

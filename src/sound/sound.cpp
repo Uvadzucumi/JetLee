@@ -15,11 +15,16 @@ bool CSoundBuffer::loadWavFile(const std::string filename, ALenum* format, unsig
 
     soundFile = fopen(filename.c_str(), "rb");
     if (!soundFile){
+        std::cerr << "Error opening " << filename.c_str() << std::endl;
         return false;
     }
 
     // Read in the first chunk into the struct
-    fread(&riff_header, sizeof(RIFF_Header), 1, soundFile);
+    if(!fread(&riff_header, sizeof(RIFF_Header), 1, soundFile)){
+        std::cerr << "Error read first chunk" << std::endl;
+        fclose(soundFile);
+        return false;
+    }
 
     //check for RIFF and WAVE tag in memeory
     if ((riff_header.chunkID[0] != 'R' ||
@@ -31,19 +36,24 @@ bool CSoundBuffer::loadWavFile(const std::string filename, ALenum* format, unsig
          riff_header.format[2] != 'V' ||
          riff_header.format[3] != 'E')){
         //    throw ("Invalid RIFF or WAVE Header");
+        std::cerr << "Wrong file header" << std::endl;
         fclose(soundFile);
         return false;
     }
 
 
     //Read in the 2nd chunk for the wave info
-    fread(&wave_format, sizeof(WAVE_Format), 1, soundFile);
+    if(!fread(&wave_format, sizeof(WAVE_Format), 1, soundFile)){
+        std::cerr << "Error read second chunk!" << std::endl;
+        fclose(soundFile);
+        return false;
+    }
     //check for fmt tag in memory
     if (wave_format.subChunkID[0] != 'f' ||
         wave_format.subChunkID[1] != 'm' ||
         wave_format.subChunkID[2] != 't' ||
         wave_format.subChunkID[3] != ' '){
-        //     throw ("Invalid Wave Format");
+        std::cerr << "Invalid Wave Format" << std::endl;
         fclose(soundFile);
         return false;
     }
@@ -54,13 +64,17 @@ bool CSoundBuffer::loadWavFile(const std::string filename, ALenum* format, unsig
     }
 
     //Read in the the last byte of data before the sound file
-    fread(&wave_data, sizeof(WAVE_Data), 1, soundFile);
+    if(!fread(&wave_data, sizeof(WAVE_Data), 1, soundFile)){
+        std::cerr << "Error read data header" << std::endl;
+        fclose(soundFile);
+        return false;
+    }
     //check for data tag in memory
     if (wave_data.subChunkID[0] != 'd' ||
         wave_data.subChunkID[1] != 'a' ||
         wave_data.subChunkID[2] != 't' ||
         wave_data.subChunkID[3] != 'a'){
-        //      throw ("Invalid data header");
+        std::cerr << "Invalid data header" << std::endl;
         fclose(soundFile);
         return false;
     }
@@ -72,7 +86,7 @@ bool CSoundBuffer::loadWavFile(const std::string filename, ALenum* format, unsig
     // Read in the sound data into the soundData variable
     if (!fread(data, wave_data.subChunk2Size, 1, soundFile)){
         fclose(soundFile);
-        //throw ("error loading WAVE data into struct!");
+        std::cerr << "error loading WAVE data into struct!" << std::endl;
         return false;
     }
     fclose(soundFile);

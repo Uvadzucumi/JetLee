@@ -58,17 +58,20 @@ struct WAVE_Data {
 
 class CSoundBase{
     protected:
-        ALCenum m_error;
+        ALCenum m_error=0;
 
     public:
 
     bool isError(){
     	m_error = alGetError();
         if (m_error != AL_NO_ERROR) {
-            //fprintf(stderr, _msg "\n");
             return true;
         }
         return false;
+    }
+
+    ALCenum getErrorCode(){
+        return m_error;
     }
 };
 

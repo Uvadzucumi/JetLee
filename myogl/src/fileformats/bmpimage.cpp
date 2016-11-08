@@ -123,10 +123,18 @@ bool CBitMapImage::LoadFromFile(const char *file_name){
     }else if(m_info_header.compression == bcBI_BITFIELDS && (m_info_header.bpp == 16 || m_info_header.bpp == 32)){ // arbitrary mask
         Log->puts("DEBUG: Arbitrary map BMP image\n");
         // read mask from file
-        fread(&m_RedMask,1,4,fp);
-        fread(&m_GreenMask,1,4,fp);
-        fread(&m_BlueMask,1,4,fp);
-        if(m_info_header.bpp==32){ fread(&m_AlphaMask,1,4,fp); }
+        if(fread(&m_RedMask,1,4,fp)!=4 || fread(&m_GreenMask,1,4,fp) != 4 || fread(&m_BlueMask,1,4,fp) !=4 ){
+            Log->puts("ERROR: Read Arbitrary map BMP image\n");
+            fclose(fp);
+            return false;
+        }
+        if(m_info_header.bpp==32){
+            if(fread(&m_AlphaMask,1,4,fp)!=4){
+                Log->puts("ERROR: Read Arbitrary map BMP image\n");
+                fclose(fp);
+                return false;
+            }
+        }
 
         m_RedShift = ShiftCount(m_RedMask);
         m_GreenShift = ShiftCount(m_GreenMask);
@@ -142,10 +150,18 @@ bool CBitMapImage::LoadFromFile(const char *file_name){
         // read palette
         if(m_info_header.colors_used){
             // read colors
-            fread(&m_palette,m_info_header.colors_used,sizeof(GLPixel32),fp);
+            if(fread(&m_palette,m_info_header.colors_used,sizeof(GLPixel32),fp)!=m_info_header.colors_used,sizeof(GLPixel32)){
+                Log->puts("ERROR: read BMP palette\n");
+                fclose(fp);
+                return false;
+            }
         }else{ // read colors (numbers - calculated)
             Log->printf("Warning: used calculated palette size!");
-            fread(&m_palette,m_palette_size,sizeof(GLPixel32),fp);
+            if(fread(&m_palette,m_palette_size,sizeof(GLPixel32),fp)!=sizeof(GLPixel32)){
+                Log->puts("ERROR: read BMP palette\n");
+                fclose(fp);
+                return false;
+            }
         }
     }
     fseek(fp, m_file_header.offset, SEEK_SET); // go to start pixel data
