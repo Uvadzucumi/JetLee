@@ -14,11 +14,7 @@
     #include <GLES2/gl2.h>
     #include <GLES2/gl2ext.h>
 #else
-    #ifdef __WIN32__
-        #include <SDL2/SDL_opengl.h>
-    #else
-        #include <SDL2/SDL_opengl.h>
-    #endif
+    #include <SDL2/SDL_opengl.h>
     #include <GL/gl.h>
     #include <GL/glu.h>
     #include <GL/glext.h>
@@ -42,9 +38,9 @@
     #define GL_FUNC_REVERSE_SUBTRACT          0x800B
 
     typedef void (APIENTRY * PFNGLBLENDEQUATIONPROC) (GLenum mode);
-    extern PFNGLBLENDEQUATIONPROC          glBlendEquation;
+    //extern PFNGLBLENDEQUATIONPROC          glBlendEquation;
     // texture units
-    extern PFNGLACTIVETEXTUREPROC           glActiveTexture;
+    //extern PFNGLACTIVETEXTUREPROC           glActiveTexture;
 #endif
 
 //typedef void (*GLfunction)();

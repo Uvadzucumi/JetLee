@@ -1,7 +1,14 @@
 cmake_minimum_required(VERSION 3.3)
 project(JetLee)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+if (WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Os")
+else()
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Os")
+endif()
+
+SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s -static-libgcc -static-libstdc++" )
+
 
 set(SOURCE_FILES
     myogl/src/3rd/picopng.cpp
@@ -65,14 +72,15 @@ set(SOURCE_FILES
     src/main.cpp
     src/sound/sound.h
     src/sound/sound.cpp
-    #src/json/json.h
-    #src/json/json-forwards.h
     src/json/jsoncpp.cpp
         )
 
 find_package(OpenGL REQUIRED)
 find_package(OpenAL REQUIRED)
-#find_package(SDL REQUIRED)
+find_package(SDL2 REQUIRED)
+
+#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_INCLUDE_CURRENT_DIR}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .)
 add_executable(JetLee ${SOURCE_FILES})
-#target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} -lSDL2)
-target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} -lSDL2 -logg -lvorbisfile)
+target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${OPENAL_LIBRARY} -lvorbisfile -logg)
+

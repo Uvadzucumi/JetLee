@@ -8,9 +8,9 @@
 #include <math.h>
 
 #ifdef __WIN32__
-PFNGLBLENDEQUATIONPROC              glBlendEquation         = NULL;
+//PFNGLBLENDEQUATIONPROC              glBlendEquation         = NULL;
 // texture units
-PFNGLACTIVETEXTUREPROC           glActiveTexture            = NULL;
+//PFNGLACTIVETEXTUREPROC           glActiveTexture            = NULL;
 #endif // __WIN32__
 
 // FBO functions
@@ -123,7 +123,7 @@ void CRender::InitGL(){
     glDisable(GL_COLOR_MATERIAL);
     glDisable(GL_BLEND);
 
-    glBlendEquation(GL_FUNC_ADD);
+    //glBlendEquation(GL_FUNC_ADD);
 
     glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
 
@@ -205,9 +205,9 @@ bool CRender::Init(int width, int height, int bpp, bool full_screen, const char 
 
     }
 #ifdef __WIN32__
-    glBlendEquation = (PFNGLBLENDEQUATIONPROC)this->GetProcAddress("glBlendEquation");
+//    glBlendEquation = (PFNGLBLENDEQUATIONPROC)this->GetProcAddress("glBlendEquation");
     // enable another
-    glActiveTexture = (PFNGLACTIVETEXTUREPROC)    GetProcAddress("glActiveTexture");
+//    glActiveTexture = (PFNGLACTIVETEXTUREPROC)    GetProcAddress("glActiveTexture");
 #endif // __WIN32__
     // if supported
     m_vbo=EnableVBOFunctions();

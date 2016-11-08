@@ -93,7 +93,11 @@ int CApplication::Run(void){
         }
 
         Render->SwapBuffers();
-        usleep(10);
+#ifdef __WIN32__
+        Sleep(1);
+#else
+        usleep(1000);
+#endif
         frames++;
     }
     Free();    // FreeMemory
