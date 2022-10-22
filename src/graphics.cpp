@@ -45,16 +45,20 @@ bool loadGraphics(int sprite_scale){
         textures.push_back(tex);
     }
 
+    std::cout << "created: " <<  textures.size() << " textures" << std::endl;
+
     MyOGL::CHudSprite *sprite;
     const Json::Value sprites_info = root["sprites"];
     for(int i=0; i<sprites_info.size(); ++i){
+        //std::cout << "sprite: " <<  i << " of " << sprites_info.size() << std::endl;
         std::string name=sprites_info[i].get("name","").asString();
+        //std::cout << "sprite name: " << name;
         int texture_index = sprites_info[i].get("texture",0).asInt();
         int left=sprites_info[i].get("l",0).asInt();
         int top=sprites_info[i].get("t",0).asInt();
         int right=sprites_info[i].get("r",0).asInt();
         int bottom=sprites_info[i].get("b",0).asInt();
-
+        //std::cout << " coords: [ left: " << left << " top: " << top << " right: " << right <<  " bottom: "<< bottom << std::endl;
         sprite=new MyOGL::CHudSprite(textures[texture_index]);
         sprite->setUVPixelCoords(left, top, right - left, bottom - top);
         sprite->setSize( (right - left) * sprite_scale, (bottom - top) * sprite_scale);

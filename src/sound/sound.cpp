@@ -124,7 +124,7 @@ bool CSoundBuffer::loadWavFile(const std::string filename, ALenum* format, unsig
                  *size, *frequency);
     return true;
 }
-
+#if ENABLE_MUSIC
 bool CSoundBuffer::loadOggFile(std::string file_name){
 // This function loads a .ogg file into a memory buffer and returns
 // the format and frequency.
@@ -203,3 +203,4 @@ bool CSoundBuffer::loadOggFile(std::string file_name){
     return true;
 
 }
+#endif

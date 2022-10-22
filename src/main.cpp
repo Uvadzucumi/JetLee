@@ -17,7 +17,9 @@
 
 #include<string>
 
+#if ENABLE_SOUND
 CGameSound *sound;
+#endif
 
 bool show_bboxes=false;
 bool free_cam=false;
@@ -135,7 +137,7 @@ void OnRender(double DeltaTime){
 }
 
 void OnUpdate(double DeltaTime){
-    for(int i=0; i<3; i++){
+    for(int i=0; i<HERO_COUNT; ++i){
         heroes[i]->Update(DeltaTime);
     }
 }
@@ -168,7 +170,7 @@ void OnLoop(double DeltaTime){
                 log("Free camera: Off");
             }
         }
-
+#if ENABLE_SOUND
         if(App->IsKeyDown(SDLK_s)){
             play_bg_music=!play_bg_music;
             if(play_bg_music){
@@ -179,7 +181,7 @@ void OnLoop(double DeltaTime){
                 log("Ppay BG music: Off");
             }
         }
-
+#endif
         if(!free_cam){
             if(App->IsKeyPressed(SDLK_LEFT) && heroes[hero_index]->isAction(HERO_ACTION_STAY)){
                 heroes[hero_index]->setOrientation(ORIENTATION_LEFT);
@@ -372,7 +374,7 @@ int main(int argc, char **argv){
         logE("Application Init Error!");
         return -1;
     };
-
+#if ENABLE_SOUND
     // init sound system
     sound=new CGameSound();
     if(!sound->init()){
@@ -389,15 +391,17 @@ int main(int argc, char **argv){
     // play BG music
     sound->setVolume(SOUND_BG_MUSIC,0.5);
     sound->play(SOUND_BG_MUSIC);
+#endif
     // Load textures & create sprites
     if(!loadGraphics(scale_factor)){
         logE("Load graphics error!");
+#if ENABLE_SOUND
         delete sound;   // close sound device
+#endif
         delete App;
         return -1;
     }
     log("loaded " << textures.size() << " textures" << std::endl << "initialized " << sprites.size() << " sprites.");// << std::endl;
-
     initHeroObjects(scale_factor, hero_index);
     log( "initialized " << heroes.size() << " heroes." );
 
@@ -432,8 +436,9 @@ int main(int argc, char **argv){
 
     // run application
     App->Run();
-
+#if ENABLE_SOUND
     delete sound;
+#endif
     delete App;
 
     return 0;

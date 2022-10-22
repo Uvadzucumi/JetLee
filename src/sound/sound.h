@@ -5,10 +5,12 @@
 #include <AL/alc.h>
 //#include <AL/alut.h>
 
+#if ENABLE_MUSIC
 #include <ogg/ogg.h>
 //#include <vorbis/codec.h>
 //#include <vorbis/vorbisenc.h>
 #include <vorbis/vorbisfile.h>
+#endif
 
 #include <iostream>
 #include <vector>

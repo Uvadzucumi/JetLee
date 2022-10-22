@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.3)
 project(JetLee)
 
+set(EnableSound ON)
+set(EnableMusic ON)
+
 if (WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Os")
 else()
@@ -8,7 +11,6 @@ else()
 endif()
 
 SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s -static-libgcc -static-libstdc++" )
-
 
 set(SOURCE_FILES
     myogl/src/3rd/picopng.cpp
@@ -62,7 +64,7 @@ set(SOURCE_FILES
     src/ai.h
     src/camera2d.h
     src/game.h
-    src/gamesound.h
+#    src/gamesound.h
     src/graphics.cpp
     src/graphics.h
     src/hero.cpp
@@ -70,18 +72,43 @@ set(SOURCE_FILES
     src/locations.cpp
     src/locations.h
     src/main.cpp
-    src/sound/sound.h
-    src/sound/sound.cpp
+#    src/sound/sound.h
+#    src/sound/sound.cpp
     src/json/jsoncpp.cpp
         )
 
 find_package(OpenGL REQUIRED)
-find_package(OpenAL REQUIRED)
 find_package(SDL2 REQUIRED)
+if(EnableSound)
+    add_definitions(-DENABLE_SOUND=true)
+    find_package(OpenAL REQUIRED)
+    list(APPEND SOURCE_FILES
+        src/gamesound.h
+        src/sound/sound.h
+        src/sound/sound.cpp
+    )
+    if(EnableMusic)
+        add_definitions(-DENABLE_MUSIC=true)
+    else()
+        add_definitions(-DENABLE_MUSIC=false)
+    endif()
+else()
+    add_definitions(-DENABLE_SOUND=false)
+endif()
 
 #set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_INCLUDE_CURRENT_DIR}")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .)
 add_executable(JetLee ${SOURCE_FILES})
-target_link_libraries(JetLee ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${OPENAL_LIBRARY} -lvorbisfile -logg)
+if(${EnableSound})
+    if(EnableMusic)
+        target_link_libraries(JetLee ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} -lvorbisfile -logg)
+    else()
+        target_link_libraries(JetLee ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY})
+    endif()
+else()
+    target_link_libraries(JetLee ${SDL2_LIBRARIES} ${OPENGL_LIBRARIES})
+endif()
+
+
 #target_link_libraries(JetLee ${OPENGL_LIBRARIES} -lSDL2 ${OPENAL_LIBRARY} -lvorbisfile -logg)
 

@@ -4,7 +4,10 @@
 #include "../myogl/src/myogl.h"
 #include "../myogl/src/ui/panel.h"
 #include "../myogl/src/3rd/enum.h"
+
+#if ENABLE_SOUND
 #include "gamesound.h"
+#endif
 
 #define SPAWN_TIME 3
 #define SPAWN_TIME_DIE 5
@@ -23,7 +26,9 @@ extern MyOGL::CApplication *App;
 extern int hatch_flares_count;
 extern bool game_over;
 extern int hero_index;
+#if ENABLE_SOUND
 extern CGameSound *sound;
+#endif
 extern int game_state;
 
 

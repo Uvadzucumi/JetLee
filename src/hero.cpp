@@ -310,7 +310,9 @@ void CBaseHero::Update(double DeltaTime){
 }
 
 void CBaseHero::hitToHero(int h_index){
+#if ENABLE_SOUND
     sound->play(SOUND_FIGHT);
+#endif
     // set orientation
     if(m_position.x<heroes[h_index]->getPosition().x){
         heroes[h_index]->setOrientation(ORIENTATION_LEFT);
@@ -320,8 +322,9 @@ void CBaseHero::hitToHero(int h_index){
     heroes[h_index]->setAction(HERO_ACTION_DIE);
     heroes[h_index]->decreaseHealth(1);
     if(h_index==hero_index && heroes[h_index]->getHealth()<=0){
-
+#if ENABLE_SOUND
         sound->play(SOUND_DIE);
+#endif
         game_state=EGameState::GAME_STATE_END;
 
     }
@@ -334,16 +337,17 @@ void CHero::Update(double DeltaTime){
         //log("game state: "<<game_state);
 
         if(this->actions[this->m_action].animation.onAnimate(DeltaTime)){
-
+#if ENABLE_SOUND
             if(
                 isAction(HERO_ACTION_RUN)
             ){
                 sound->play(SOUND_STEP);
             }
-
+#endif
             MyOGL::Vector2i climb_movement={0,0};
 
             if(this->actions[this->m_action].animation.isFinished()){
+#if ENABLE_SOUND
                 if(
                     (
                     isAction(HERO_ACTION_CLIMB0) ||
@@ -352,6 +356,7 @@ void CHero::Update(double DeltaTime){
                 ){
                     sound->play(SOUND_STEP);
                 }
+#endif
                 // if player continue runnig
                 if(this->isAction(HERO_ACTION_RUN) &&
                     (
@@ -508,7 +513,9 @@ void CHero::Update(double DeltaTime){
             if(isInsideBlock(EBlockTypes::TILE_FLARE)){
                 MyOGL::Vector2i coords=this->getFoundInsideBlock();
                 if(locations[current_location]->collectFlareByCoords(coords.x, coords.y)){
+#if ENABLE_SOUND
                     sound->play(SOUND_FLARE_COLLECT);
+#endif
                     hatch_flares_count-=1;
                     if(!hatch_flares_count){
                         // open hatch

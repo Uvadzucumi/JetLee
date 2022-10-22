@@ -92,9 +92,9 @@ public:
         SOUD_CREATE_MACRO(SOUND_FIGHT, "data/fight.wav");
         SOUD_CREATE_MACRO(SOUND_FLARE_COLLECT, "data/flare.wav");
         SOUD_CREATE_MACRO(SOUND_DIE, "data/die.wav");
-
+#if ENABLE_MUSIC
         MUSIC_CREATE_MACRO(SOUND_BG_MUSIC, "data/bg.ogg");
-
+#endif
         return true;
     }
 
