@@ -54,3 +54,7 @@ Compile
 cmake .
 make
 ```
+Install Requirements in Windows (MSYS2)
+```
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw64/mingw-w64-x86_64-SDL2 mingw-w64-x86_64-openal mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis
+```
