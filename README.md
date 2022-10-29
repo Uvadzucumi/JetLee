@@ -9,8 +9,6 @@ Created for igdc.ru contest #125
 ![screenshot](https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-02.png?raw=true)
 ![screenshot](https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-03.png?raw=true)
 
-https://github.com/Uvadzucumi/JetLee/blob/master/data/scr/scr-01.png?raw=true
-
 Windows build (https://raw.github.com/Uvadzucumi/jetlee/master/bin/JetLee.zip)
 
 
@@ -42,8 +40,8 @@ Player control keys
 
 Requirements: SDL2 (http://libsdl.org/), OpenGL (http://opengl.org), OpenAl (http://openal.org/), libogg, libvorbisfile.
 
-Compile from sources
---------------------
+Compile from sources (Linux)
+----------------------------
 
 Install Requirements in Debian/Ubuntu OS
 ```
@@ -54,7 +52,16 @@ Compile
 cmake .
 make
 ```
-Install Requirements in Windows (MSYS2)
+Compile from sources Windows (MSYS2)
+------------------------------------
+
+Install MSYS2 (https://www.msys2.org/)
+
+Update MSYS
 ```
-pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw64/mingw-w64-x86_64-SDL2 mingw-w64-x86_64-openal mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis
+pacman -Syu
+```
+Install Requirements
+```
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw-w64-x86_64-SDL2 mingw-w64-x86_64-openal mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis
 ```

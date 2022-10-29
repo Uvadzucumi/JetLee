@@ -405,7 +405,13 @@ int main(int argc, char **argv){
     initHeroObjects(scale_factor, hero_index);
     log( "initialized " << heroes.size() << " heroes." );
 
-    initLocations(scale_factor);
+    if(!initLocations(scale_factor)){
+        std::cout << "Init locations failed";
+    #if ENABLE_SOUND
+            delete sound;   // close sound device
+    #endif
+        return -1;
+    }
 
     log( "initialised " << locations.size() << " locations." );
 
