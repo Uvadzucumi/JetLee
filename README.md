@@ -65,3 +65,8 @@ Install Requirements
 ```
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-gdb mingw-w64-x86_64-make mingw-w64-x86_64-SDL2 mingw-w64-x86_64-openal mingw-w64-x86_64-libogg mingw-w64-x86_64-libvorbis
 ```
+Compile
+```
+cmake -G Ninja . -DCMAKE_BUILD_TYPE=Release
+cmake --build .
+```
