@@ -4,13 +4,15 @@ project(JetLee)
 set(EnableSound ON)
 set(EnableMusic ON)
 
-if (WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Os")
-else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Os")
-endif()
+#if (WIN32)
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Os")
+#else()
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Os")
+#endif()
 
-SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s -static-libgcc -static-libstdc++" )
+#SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -s -static-libgcc -static-libstdc++" )
+
+set(CMAKE_CXX_STANDARD 14)
 
 set(SOURCE_FILES
     myogl/src/3rd/picopng.cpp
